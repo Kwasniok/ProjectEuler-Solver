@@ -10,3 +10,4 @@
 # list of all problems to be registered:
 
 from problem_000 import *
+from problem_001 import *
