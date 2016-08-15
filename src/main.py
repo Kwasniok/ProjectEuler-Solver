@@ -18,7 +18,7 @@ from problems_all import *
 
 # Version
 version_major = 0
-version_minor = 0
+version_minor = 1
 
 ## returns program version as string
 def get_version():
