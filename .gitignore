@@ -7,10 +7,20 @@
 ehthumbs.db
 Thumbs.db
 
+# Xcode user settings
+xcshareddata
+xcuserdata
+
+# Xcode Source-Control
+*.moved-aside
+
 # Eclipse
 .project
 .pydevproject
 .settings
+
+# Python caches
+*.pyc
 
 # suppressed files
 data/*
