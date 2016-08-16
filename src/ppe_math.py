@@ -185,6 +185,23 @@ def totient_from_prime_factors(n, ps):
 
     return n * mult / div
 
+## returns the highest common factor
+# might be n (resp. m) if m (resp. n) can be divided by the other natural number
+def highest_common_factor(n, m):
+    #eclidian algorithm
+    a = max(n, m)
+    b = min(n, m)
+
+    while True:
+        r = a % b
+        if r == 0:
+             return b
+        a = b
+        b = r
+
+## returns if the natural numbers n and m are relative prime
+def are_relative_prime(n, m):
+    return highest_common_factor(n, m) == 1
 
 ################
 #-- Fractions --#
