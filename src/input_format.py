@@ -10,7 +10,7 @@
 import re
 from colours import *
 from date import Date
-from util import listToFancyStr
+from util import list_to_fancy_str
 
 # Each input format is a list of variable length starting with the InputType
 # and continuing with specifications like limits (see annotations).
@@ -75,7 +75,7 @@ def valueFromString(ipf, s):
                 return (True, v)
 
         eStr = "element " + dye_warning("not in list") + ":\n"
-        eStr += listToFancyStr(ipf[1], ', ', highlightColour = Colours.INPUTVAR, startHighlight = 0, endHighlight = len(ipf[1]))
+        eStr += list_to_fancy_str(ipf[1], ', ', highlightColour = Colours.INPUTVAR, startHighlight = 0, endHighlight = len(ipf[1]))
         return (False, eStr)
 
     elif ipf[0] == InputType.TUPLE_HETEROGENE:
@@ -112,9 +112,9 @@ def valueFromString(ipf, s):
             if date.day != day or date.month != month or date.year != year:
                 return (False, dye_warning("this date is not supported"))
             elif ipf[1] != None and date < ipf[1]:
-                return (False, "date is before limit of " + dye_limit(ipf[1].getDateAsString()) + ".")
+                return (False, "date is before limit of " + dye_limit(ipf[1].get_date_as_string()) + ".")
             elif ipf[2] != None and date > ipf[2]:
-                return (False, "date is past limit of " + dye_limit(ipf[2].getDateAsString()) + ".")
+                return (False, "date is past limit of " + dye_limit(ipf[2].get_date_as_string()) + ".")
             else:
                 return (True, date)
         else:
@@ -165,7 +165,7 @@ def usage_text_for_input_format(ipf): #TODO: COMPLETE!
 
     elif ipf[0] == InputType.CHOOSE_FROM_LIST:
         uStr = "type in one of these values:\n"
-        uStr += listToFancyStr(ipf[1], ', ', highlightColour = Colours.INPUTVAR, startHighlight = 0, endHighlight = len(ipf[1]))
+        uStr += list_to_fancy_str(ipf[1], ', ', highlightColour = Colours.INPUTVAR, startHighlight = 0, endHighlight = len(ipf[1]))
 
         return uStr
 
@@ -182,11 +182,11 @@ def usage_text_for_input_format(ipf): #TODO: COMPLETE!
         uStr = "type in a " + dye_input_type("date") + " (DD.MM.YY)"
 
         if ipf[1] != None and ipf[2] != None:
-            uStr += " between " + dye_limit(ipf[1].getDateAsString()) + " and " + dye_limit(ipf[2].getDateAsString()) + " (" + dye_highlight("including limits") + ")"
+            uStr += " between " + dye_limit(ipf[1].get_date_as_string()) + " and " + dye_limit(ipf[2].get_date_as_string()) + " (" + dye_highlight("including limits") + ")"
         elif ipf[1] != None:
-            uStr += " past " + dye_limit(ipf[1].getDateAsString()) + " (" + dye_highlight("including limit") + ")"
+            uStr += " past " + dye_limit(ipf[1].get_date_as_string()) + " (" + dye_highlight("including limit") + ")"
         elif ipf[2] != None:
-            uStr += " before " + dye_limit(ipf[2].getDateAsString()) + " (" + dye_highlight("including limit") + ")"
+            uStr += " before " + dye_limit(ipf[2].get_date_as_string()) + " (" + dye_highlight("including limit") + ")"
         else:
             pass
 

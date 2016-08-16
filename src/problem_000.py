@@ -10,7 +10,7 @@
 from sys import stdout
 from time import time
 from input_format import *
-from util import listToFancyStr
+from util import list_to_fancy_str
 
 
 ##############
@@ -24,17 +24,16 @@ class Problem:
     problem_nr = 0 # must be overwritten
     # optional overwrite:
     description_str = None
-    input_format = None # e.g. (InputType.NUMBER_INT, 0, 1) see inputFormat.py
+    input_format = None # e.g. (InputType.NUMBER_INT, 0, 1) see input_format.py
     default_input = None
     supports_details = False
-    might_take_long_time = False
 
     # internal:
     last_input = None # is set automatically
     last_result = None # is set manually in calculateProblemWith / automatically printed
     last_result_details = None # is set manually in calculateProblemWith / manually printed with text
 
-    ## sets the attributes including problemNr, decriptionStr, inputFormat etc.
+    ## sets the attributes including problem_nr, decriptionStr, input_format etc.
     def __init__(self):
         self.problem_nr = None
 
@@ -46,10 +45,10 @@ class Problem:
     def should_warn_long_execution_time(self):
         return False
 
-    def pre_calculate(self, lastInput):
+    def pre_calculate(self, last_input):
         self.last_result = None
         self.last_result_details = None
-        self.lastInput = lastInput
+        self.last_input = last_input
 
     ## contains the solving algorithm for the problem (muste be overwritten)
     def calculate(self, input):

@@ -9,7 +9,7 @@
 
 from colours import *
 
-def listToFancyStr(L, separator = None, normalColour = None, highlightColour = None, startHighlight = None, endHighlight = None):
+def list_to_fancy_str(L, separator = None, normalColour = None, highlightColour = None, startHighlight = None, endHighlight = None):
 
     # clip bounds for special dye colour
     if startHighlight < 0:

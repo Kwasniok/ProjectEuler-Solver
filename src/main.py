@@ -175,7 +175,7 @@ def parse_main_loop_input(input):
         ps = []
         for p in glob_problems.keys():
             ps.append(p)
-        print(listToFancyStr(ps, ", "))
+        print(list_to_fancy_str(ps, ", "))
 
     elif input == "quit":
         on_quit()

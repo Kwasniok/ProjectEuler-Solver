@@ -7,7 +7,7 @@
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
-def isLeapYear(year):
+def is_leap_year(year):
             if year % 400 == 0:
                 return True
             if year % 4 == 0 and year % 100 != 0:
@@ -78,10 +78,10 @@ class Date():
         if wdi == 1:
             return "Sunday"
 
-    def offsetDay(self, integer):
+    def offset_day(self, integer):
         return integer -2
 
-    def offsetMonth(self, integer):
+    def offset_month(self, integer):
         if integer == 1:
             return 1
         if integer == 2:
@@ -107,7 +107,7 @@ class Date():
         if integer == 12:
             return 6
 
-    def offsetCentury(self, c):
+    def offset_century(self, c):
         century = int(c/100) % 4
         if century == 0:
             return -1
@@ -118,7 +118,7 @@ class Date():
         if century == 3:
             return 0
 
-    def offsetYear(self, year):
+    def offset_year(self, year):
         decade = year % 100
 
         first =  int(decade / 12)
@@ -127,13 +127,13 @@ class Date():
 
         return first + secound + third
 
-    def calculateWeekday(self):
+    def calculate_weekday(self):
         releap = 0
-        if isLeapYear(self.year):
+        if is_leap_year(self.year):
             if self.month == 1 or self.month == 2:
                 #print("releaped")
                 releap = -1
-        return (self.day + self.offsetMonth(self.month) + self.offsetYear(self.year) + releap + self.offsetCentury(self.year)) % 7
+        return (self.day + self.offset_month(self.month) + self.offset_year(self.year) + releap + self.offset_century(self.year)) % 7
 
     def set(self, year, month, day):
         self.year = year
@@ -141,65 +141,65 @@ class Date():
         self.day = day
         return self
 
-    def getDate(self):
+    def get_date(self):
         self.update()
         return (self.year, self.month, self.day)
 
-    def getDateAsString(self):
+    def get_date_as_string(self):
         return "0"*(2-len(str(self.day))) + str(self.day) + "." + "0"*(2-len(str(self.month))) + str(self.month) + "." + "0"*(4-len(str(self.year))) + str(self.year)
 
-    def getWeekday(self):
+    def get_weekday(self):
         self.update()
-        return self.weekdayIntToStr(self.calculateWeekday())
+        return self.weekdayIntToStr(self.calculate_weekday())
 
-    def printDate(self):
+    def print_date(self):
         # self.update() is implicit
-        print(self.getDate(), ",", self.getWeekday())
+        print(self.get_date(), ",", self.get_weekday())
         return self
 
     def update(self):
-        self.addDay(0)
+        self.add_days(0)
         return self
 
-    def addDay(self,day=1):
+    def add_days(self,day=1):
         self.day += day
         if self.month == 2:
             if self.day > 28:
-                if isLeapYear(self.year):
+                if is_leap_year(self.year):
                     if self.day > 29:
                         self.day = self.day - 29
-                        self.addMonth()
-                        self.addDay(0)
+                        self.add_months()
+                        self.add_days(0)
                 else:
                     self.day = self.day - 28
-                    self.addMonth()
-                    self.addDay(0)
+                    self.add_months()
+                    self.add_days(0)
 
         if self.month == 4 or self.month == 6 or self.month ==  9 or self.month == 11:
             if self.day > 30:
                 self.day = self.day - 30
-                self.addMonth()
-                self.addDay(0)
+                self.add_months()
+                self.add_days(0)
 
         else:
             if self.day > 31:
                 self.day = self.day - 31
-                self.addMonth()
-                self.addDay(0)
+                self.add_months()
+                self.add_days(0)
 
 
-    def addMonth(self, month = 1):
+    def add_months(self, month = 1):
         self.month += month
         if self.month > 12:
             self.month = self.month - 12
-            self.addYear()
-            self.addMonth(0)
+            self.add_years()
+            self.add_months(0)
 
 
-    def addYear(self, year = 1, month = 0, day = 0):
+    def add_years(self, year = 1, month = 0, day = 0):
         self.year += year
 
     def add(self, days=0, months=0, years=0):
-        self.addYear(years)
-        self.addMonth(months)
-        self.addDay(days)
+        self.add_years(years)
+        self.add_months(months)
+        self.add_days(days)
