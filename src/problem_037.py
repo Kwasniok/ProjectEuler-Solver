@@ -9,7 +9,7 @@
 
 from problem_000 import *
 from math import log10
-from ppe_math import is_prime
+from prime import is_prime
 
 class Problem_037(Problem):
     

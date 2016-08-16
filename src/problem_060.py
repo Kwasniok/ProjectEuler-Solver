@@ -9,7 +9,8 @@
 
 from problem_000 import *
 from choose import choose
-from ppe_math import is_prime, next_prime, binomial_coefficient as nCr
+from prime import is_prime, next_prime
+from ppe_math import binomial_coefficient as nCr
 from math import log10
 
 class Problem_060(Problem):

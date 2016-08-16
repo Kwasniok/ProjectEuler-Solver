@@ -9,7 +9,7 @@
 
 from problem_000 import *
 from math import sqrt
-from ppe_math import is_prime, next_prime
+from prime import is_prime, next_prime
 
 class Problem_046(Problem):
     

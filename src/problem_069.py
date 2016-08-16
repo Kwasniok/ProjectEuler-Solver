@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import next_prime
+from prime import next_prime
 from sys import float_info
 
 class Problem_069(Problem):

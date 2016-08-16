@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import is_prime
+from prime import is_prime
 from ppe_permutation import all_permutations
 
 class Problem_049(Problem):

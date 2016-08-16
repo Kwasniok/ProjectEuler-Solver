@@ -9,7 +9,8 @@
 
 from problem_000 import *
 from ppe_permutation import num_of_permutations, get_permutation
-from ppe_math import number_from_list, is_prime
+from prime import is_prime
+from ppe_math import number_from_list
 
 class Problem_041(Problem):
     

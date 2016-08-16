@@ -10,7 +10,8 @@
 
 from problem_000 import *
 from math import log10
-from ppe_math import get_digits_as_list, number_from_digit_list, is_prime
+from prime import is_prime
+from ppe_math import get_digits_as_list, number_from_digit_list
 from sys import maxint
 from ppe_permutation import all_rotations
 

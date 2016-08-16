@@ -8,7 +8,8 @@
 #
 
 from problem_000 import *
-from ppe_math import next_prime, totient_from_prime_factors
+from prime import next_prime
+from ppe_math import totient_from_prime_factors
 from ppe_permutation import is_permutation_of_number
 from math import sqrt
 

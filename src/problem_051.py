@@ -8,7 +8,8 @@
 #
 
 from problem_000 import *
-from ppe_math import is_prime, next_prime, binomial_coefficient as nCr
+from prime import is_prime, next_prime
+from ppe_math import binomial_coefficient as nCr
 from choose import choose_indexes_only, choose_reverse_indexes_only
 
 class Problem_051(Problem):
