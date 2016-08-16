@@ -56,6 +56,88 @@ class Sorted_Set():
             i += 1
         return None
 
+    ## returns smallest elements in sorted set which is greater than value or None if there is none
+    def next(self, value):
+
+        if len(self.elements) == 0:
+            return None
+
+        # binary search
+
+        l = 0
+        r = len(self.elements) - 1
+        m = None
+
+        while True:
+            # check if direct search was unsuccessful
+            if l > r:
+                break
+            # set middle index
+            m = int((l + r) / 2)
+            # compare value with middle element (and move bounderies if necessary)
+            if self.elements[m] < value:
+                l = m + 1
+            elif self.elements[m] > value:
+                r = m - 1
+            else: # found element in sorted set
+                # if there is a next element in set return it or return None otherwise
+                if m + 1 < len(self.elements):
+                    return self.elements[m + 1]
+                else:
+                    return None
+
+        # value not found in sorted set find next element based on last middle position
+        # note: m stops close to where value would be in this sorted set
+        #       hence the next value is either at m or m + 1 (or not in this set)
+        if self.elements[m] > value:
+            return self.elements[m]
+        else:
+            if m + 1 < len(self.elements):
+                return self.elements[m + 1]
+            else:
+                return None
+
+    ## returns largest elements in sorted set which is less than value or None if there is none
+    def previous(self, value):
+
+        if len(self.elements) == 0:
+            return None
+
+        # binary search
+
+        l = 0
+        r = len(self.elements) - 1
+        m = None
+
+        while True:
+            # check if direct search was unsuccessful
+            if l > r:
+                break
+            # set middle index
+            m = int((l + r) / 2)
+            # compare value with middle element (and move bounderies if necessary)
+            if self.elements[m] < value:
+                l = m + 1
+            elif self.elements[m] > value:
+                r = m - 1
+            else: # found element in sorted set
+                # if there is a previous element in set return it or return None otherwise
+                if m > 0:
+                    return self.elements[m - 1]
+                else:
+                    return None
+
+        # value not found in sorted set find next element based on last middle position
+        # note: m stops close to where value would be in this sorted set
+        #       hence the next value is either at m or m - 1 (or not in this set)
+        if self.elements[m] < value:
+            return self.elements[m]
+        else:
+            if m > 0:
+                return self.elements[m - 1]
+            else:
+                return None
+
     # set related methods
 
     ## returns the overlap of two sets
