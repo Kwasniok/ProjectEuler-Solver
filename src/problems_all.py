@@ -79,3 +79,4 @@ from problem_066 import *
 from problem_067 import *
 from problem_068 import *
 from problem_069 import *
+from problem_070 import *
