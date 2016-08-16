@@ -14,7 +14,7 @@ class Problem_071(Problem):
 
     def __init__(self):
         self.problem_nr = 71
-        self.input_format = (InputType.NUMBER_INT, 1, 10000000)
+        self.input_format = (InputType.NUMBER_INT, 3, 10000000)
         self.default_input = 1000000
         self.description_str = '''Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
 
