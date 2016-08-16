@@ -45,3 +45,4 @@ from problem_032 import *
 from problem_033 import *
 from problem_034 import *
 from problem_035 import *
+from problem_036 import *
