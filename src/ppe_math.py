@@ -1,9 +1,7 @@
 #coding=UTF_8
 
 from math import sqrt, floor
-from sys import stdout
 import copy
-from util import list_to_fancy_str
 from prime import is_prime
 
 
