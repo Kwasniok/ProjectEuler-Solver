@@ -48,3 +48,4 @@ from problem_035 import *
 from problem_036 import *
 from problem_037 import *
 from problem_038 import *
+from problem_039 import *
