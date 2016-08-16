@@ -43,3 +43,4 @@ from problem_030 import *
 from problem_031 import *
 from problem_032 import *
 from problem_033 import *
+from problem_034 import *
