@@ -21,3 +21,4 @@ from problem_008 import *
 from problem_009 import *
 from problem_010 import *
 from problem_011 import *
+from problem_012 import *
