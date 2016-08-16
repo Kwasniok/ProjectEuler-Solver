@@ -39,3 +39,4 @@ from problem_026 import *
 from problem_027 import *
 from problem_028 import *
 from problem_029 import *
+from problem_030 import *
