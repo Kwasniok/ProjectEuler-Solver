@@ -2,7 +2,7 @@
 
 from math import sqrt, floor
 import copy
-from prime import is_prime
+from prime import is_prime, next_prime
 
 
 #############
@@ -184,6 +184,20 @@ def factorise(n):
         return [-1] + lazy_factorise(-n)
     else:
         return lazy_factorise(n)
+
+##returns and (unsorted!) set of distinct prime factors of the natural number n
+def distinct_prime_factors(n):
+    if n == 1:
+        return set()
+    else:
+        i = 2
+        while i <= n:
+            # n can be divided by i
+            if is_prime(i) and n % i == 0:
+                while n % i == 0:
+                    n /= i
+                return distinct_prime_factors(n) | {i}
+            i = next_prime(i)
 
 def totient(n):
     dpfsn = set(lazy_factorise(n)) # distinct prime factors
