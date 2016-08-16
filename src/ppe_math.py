@@ -12,17 +12,17 @@ from prime import is_prime
 #############
 
 class Fraction():
-    
+
     def __init__(self, numerator = 0, denominator = 1):
         self.numerator = numerator
         self.denominator = denominator
-        
+
     def __str__(self):
         return str(self.numerator) + " / " + str(self.denominator)
-    
+
     def __repr__(self):
         return str(self)
-    
+
     def evaluate(self):
         return float(self.numerator) / float(self.denominator)
 
@@ -37,17 +37,17 @@ def number_from_list(L):
 def list_from_number(N):
     if N == 0:
         return [0]
-    
+
     l = []
-    
+
     if N < 0:
         N = -N
         l[0:0] = ['-']
-        
+
     while N != 0:
         l[0:0] = [N % 10]
         N /= 10
-        
+
     return l
 
 ##################
@@ -59,32 +59,32 @@ def is_even(number):
 
 def is_abundant(number):
     return sum_of_all_proper_divisors_of(number) - number > number
-    
+
 def is_deficient(number):
     return sum_of_all_proper_divisors_of(number) - number < number
 
 # n must be an positive integer
 def get_digits_as_list(N):
-    
+
     if type(N) != int or N < 0:
         return None
-    
+
     if N == 0:
         return [0]
-    
+
     Ds = []
     while N != 0:
         Ds[0:0] = [N % 10]
         N /= 10
-    
+
     return Ds
 
 # converts a list of positive integers to a number
 def number_from_digit_list(Ds):
-    
+
     if type(Ds) != list:
         return None
-    
+
     n = 0
     for d in Ds:
         if type(d) != int or d < 0:
@@ -93,29 +93,29 @@ def number_from_digit_list(Ds):
         else:
             n *= 10
             n += d
-            
+
     return n
 
 # n must be an positive integer
 def is_pandigital(n, include_zero = False):
-    
+
     if type(n) != int or n < 0:
         return None
-    
+
     # checks if each digit from 1 (or 0) is used exactly once
     #     0      1      2      3      4      5      6      7      8      9
     Ds = [False, False, False, False, False, False, False, False, False, False]
     ds = 0
-    
+
     while n != 0:
-        
+
         # get next digit
         d = n % 10
-        
+
         # zero allowed?
         if d == 0 and (not include_zero):
             return False
-            
+
         # digit already used?
         if (Ds[d]):
             # digit occurs twice
@@ -124,14 +124,14 @@ def is_pandigital(n, include_zero = False):
             # register digit
             Ds[d] = True
             ds += 1
-        
+
         n /= 10
-        
+
     if include_zero:
         return ds == 10
     else:
         return ds == 9
-    
+
 # n must be an integer
 # a list is returned from witch the original value can be recreated by multiplying a variable initially set to 1 by each element of the list
 # otherwise 1 is skipped as factor
@@ -145,7 +145,7 @@ def lazy_factorise(n):
                 if is_prime(i) and n % i == 0:
                     return [i] + lazy_factorise(n / i)
                 i += 1
-                
+
 # n must be an integer
 # a list is returned from witch the original value can be recreated by multiplying a variable initially set to 1 by each element of the list
 # a list containing a zero represents 0
@@ -154,12 +154,12 @@ def lazy_factorise(n):
 def factorise(n):
     if type(n) != int:
         return None
-    
+
     if n == 0:
         return [0]
-    
+
     negative = n < 0
-    
+
     if negative:
         return [-1] + lazy_factorise(-n)
     else:
@@ -167,26 +167,26 @@ def factorise(n):
 
 def totient(n):
     dpfsn = set(lazy_factorise(n)) # distinct prime factors
-    
+
     mult = 1
     div = 1
     for p in dpfsn:
         mult *= p - 1
         div *= p
-    
+
     return n * mult / div
 
 def totient_from_prime_factors(n, ps):
     dpfsn = set(ps) # distinct prime factors
-    
+
     mult = 1
     div = 1
     for p in dpfsn:
         mult *= p - 1
         div *= p
-    
+
     return n * mult / div
-    
+
 
 ################
 #-- Fractions --#
@@ -198,30 +198,30 @@ def totient_from_prime_factors(n, ps):
 def simplify_fraction_dec(n, d):
     if type(n) != int or type(d) != int or d == 0:
         return None
-    
+
     if n == 1 or d == 1: # for performance only
         return (n, d)
-    
+
     # get prime factors
     pfsn = factorise(n)
     pfsd = factorise(d)
-    
+
     # cancel prime factors (new prime factors)
     npfsa = copy.copy(pfsn)
     npfsb = copy.copy(pfsd)
-    
+
     for x in pfsd:
         try:
             npfsa.remove(x)
         except:
             pass
-        
+
     for x in pfsn:
         try:
             npfsb.remove(x)
         except:
             pass
-    
+
     # create simplified fraction
     n = 1
     d = 1
@@ -229,7 +229,7 @@ def simplify_fraction_dec(n, d):
         n *= x
     for x in npfsb:
         d *= x
-        
+
     return (n, d)
 
 
@@ -244,9 +244,9 @@ def number_of_divisors(number):
         if number % i == 0:
             divs += 1
         i += 1
-        
+
     divs *= 2
-    
+
     return divs
 
 def list_of_divisors(number):
@@ -257,9 +257,9 @@ def list_of_divisors(number):
             divs.append(i)
             divs.append(number / i)
         i += 1
-    
+
     divs.sort()
-    
+
     return divs
 
 def set_of_proper_divisors(number):
@@ -271,10 +271,10 @@ def set_of_proper_divisors(number):
             divs.add(i)
             divs.add(number / i)
         i += 1
-        
+
     if number % s == 0:
         divs.add(int(s))
-    
+
     return divs
 
 def all_proper_divisors_of(number):
@@ -285,17 +285,17 @@ def all_proper_divisors_of(number):
         if number % i == 0:
             divsA.append(i)
         i += 1
-        
+
     for k in range(len(divsA), 0, -1):
         if divsA[k-1] < sqrt(number):
             divsB.append(int(number/divsA[k-1]))
-        
+
     return divsA + divsB #sorted array
 
 
 def sum_of_all_proper_divisors_of(number):
     sumOfDivs = 1
-        
+
     i = 2
     while i <= sqrt(number):
         if number % i == 0:
@@ -303,7 +303,7 @@ def sum_of_all_proper_divisors_of(number):
             if i < sqrt(number):
                 sumOfDivs += int(number/i)
         i += 1
-    
+
     return sumOfDivs
 
 #################
@@ -312,21 +312,21 @@ def sum_of_all_proper_divisors_of(number):
 
 _digits_for_base_ = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 def get_digit_as_char(d):
-    
+
     if type(d) != int or d < 0 or d > 35:
         return None
-    
+
     return _digits_for_base_[d]
 
 # get positive integer N in Base b as a string
 def inBase(N, b):
-    
+
     if type(N) != int or type(b) != int or N < 0 or b < 0:
         return None
-    
+
     if N == 0:
         return '0'
-    
+
     n = ''
     while N != 0:
         n = get_digit_as_char(N % b) + n
@@ -338,10 +338,10 @@ def inBase(N, b):
 #################
 
 def is_palindrome(E):
-    
+
     if type(E) != list and type(E) != str:
         return None
-        
+
     for i in range(0, len(E) / 2):
         if E[i] != E[-(i+1)]:
             return False
@@ -353,7 +353,7 @@ def is_palindrome(E):
 
 def collatz_depth(N):
             counter = 1
-            
+
             if N == 1:
                 return counter
             else:
@@ -363,9 +363,9 @@ def collatz_depth(N):
                 else:
                     counter += collatz_depth(N*3 + 1)
                     return counter
-                
+
 def collatz_chain(N):
-    
+
     if N == 1:
         return [N]
     else:
@@ -373,7 +373,7 @@ def collatz_chain(N):
             return [N] + collatz_chain(N / 2)
         else:
             return [N] + collatz_chain(N*3 + 1)
-        
+
 
 #-- Fibonacci --#
 
@@ -462,37 +462,37 @@ def octagonal_number_inverse(o):
 #-- continued fractions --#
 ###########################
 
-# takes only a positive integer s (All other parameters are used by the recursive algorithm!) 
+# takes only a positive integer s (All other parameters are used by the recursive algorithm!)
 # returns list of integer value pairs representing the continues fraction
 # format (an, (nsn, dn)) where nsn is the nth numerator summand and dn is the nth denominator as part of the intermediate fraction
 # first pair represents digit before point
 def get_continued_fraction_for_sqrt_of(s, ns = 0.0, d = 1.0, cfivps = None, cf = None): # s := square, ns := numerator summand, d := denominator, cfivps := continued fraction integer values pairs (needed for paeriod detection), cf := continued fraction
-    
+
     if cfivps == None: # is first iteration
         cfivps = []
-        
+
         ipi = floor(sqrt(s)) # integer part
         nsi = -ipi
         di = 1.0
-        
+
     else:
         nsi = - ns
         di =  (s - (ns ** 2)) / d
-        
+
         ipi = floor((sqrt(s) + nsi) / di)
-        
+
         nsi -= ipi * di
-    
+
     cfivpi = (ipi, (nsi, di))
-    
+
     if not cfivpi in cfivps:
         cfivps.append(cfivpi)
-        
+
         if cf == None:
             cf = Continued_Fraction(int(ipi), [])
         else:
             cf.appendToPeriod(int(ipi))
-        
+
         return get_continued_fraction_for_sqrt_of(s, nsi, di, cfivps, cf)
     else:
         return cf
@@ -506,13 +506,13 @@ def get_acf_index(a, k):
 # RECUSIVE VERSION / VERY!!! SLOW!!!
 # n := current depth (decreasing) , N := approximation limit, ks := list of all fraction parameters (first digit and period)
 def _approximate_continued_fraction_from_list(n, N, ks):
-    
+
     if n == -1:
         return 1
-    
+
     if n == 0:
         return ks[get_acf_index(N, len(ks) - 1)]
-    
+
     return ks[get_acf_index(N - n, len(ks) - 1)] * _approximate_continued_fraction_from_list(n - 1, N, ks) + _approximate_continued_fraction_from_list(n - 2, N, ks)
 '''
 
@@ -520,33 +520,33 @@ def _approximate_continued_fraction_from_list(n, N, ks):
 def _approximate_continued_fraction_from_list(n, ks):
     N = 1
     D = 0
-    
+
     i = n
     while i >= 0:
         d = ks[get_acf_index(i, len(ks) - 1)]
-        
+
         Ni = D + d * N
         Di = N
-        
+
         N = Ni
         D = Di
-        
+
         i -= 1
-        
+
     return Fraction(N, D)
 
 # TODO: ADD FUNCTION BASED SUPPORT!
 class Continued_Fraction():
-    
+
     # takes an integer an a list of integers
     def __init__(self, firstDigit = 0, period = [], periodIsList = True):
         self.firstDigit = firstDigit
         self.period = period
         self.periodIsList = periodIsList
-        
+
     def __str__(self):
         s = '[' + str(self.firstDigit) + ';('
-        
+
         if self.periodIsList:
             i = 0
             while i < len(self.period):
@@ -554,21 +554,21 @@ class Continued_Fraction():
                 if i + 1 < len(self.period):
                     s += ','
                 i += 1
-        
+
         s += ')]'
         return s
-    
+
     def __repr__(self):
         return str(self)
-    
+
     def getPeriodLength(self):
         if self.periodIsList:
             return len(self.period)
         return None
-    
+
     def appendToPeriod(self, p):
         self.period.append(p)
-    
+
     def getApproximation(self, i):
         if i < 0:
             return None
@@ -576,7 +576,7 @@ class Continued_Fraction():
             ks = [self.firstDigit] + self.period
             #return Fraction(_approximate_continued_fraction_from_list(i, i, ks), _approximate_continued_fraction_from_list(i - 1, i, ks))
             return _approximate_continued_fraction_from_list(i, ks)
-        
+
 
 
 
@@ -604,7 +604,7 @@ def binomial_coefficient(n,k):
 
 def worth_of_string(str):
     worth = 0
-    
+
     for c in str:
         if c == 'A' or c == 'a':
             worth += 1
@@ -658,13 +658,13 @@ def worth_of_string(str):
             worth += 25
         if c == 'Z' or c == 'z':
             worth += 26
-        
+
     return worth
 
 def character_for_int(number):
     if number > 26:
         return ""
-    
+
     if number == 1:
         return "A"
     if number == 2:
@@ -729,25 +729,25 @@ def character_for_int(number):
 #------------------------------#
 
 class Permutation():
-    
+
     def all_permutations_from_list(E):
         list = []
         for i in range(faculty(len(E))):
             list.append(Permutation.permutation_from_list(i, E))
         return list
-    
-    
+
+
     def permutation_from_list(n, e):
-        
+
         DigitNumber = int((n % faculty(len(e)))/faculty(len(e)-1))
-        
+
         D = e[DigitNumber]
-        
+
         if len(e) > 1:
             e2 = copy.copy(e)
             del(e2[DigitNumber])
             D += Permutation.permutation_from_list(n, e2)
-            
+
         return D
 
 #-----------------------#
@@ -755,42 +755,41 @@ class Permutation():
 #-----------------------#
 
 def abc_grid_for(N=3):
-    
+
     paths = []
     all = ""
-    
+
     for c in range(1, N+1):
         all += character_for_int(c)
-    
+
     def ABCGrid(n, path=""):
         if n == 0:
             paths.append(path)
-                
+
         for i in range(1, N+1):
             if not character_for_int(i) in path:
                 ABCGrid(n-1, path + character_for_int(i))
-                    
-        
+
+
     ABCGrid(N)
     return paths
 
 def number_grid_for(N=3):
-    
+
     paths = []
     all = ""
-    
+
     for c in range(0, N):
         all += str(c)
-    
+
     def number_grid(n, path=""):
         if n == 0:
             paths.append(path)
-                
+
         for i in range(0, N):
             if not str(i) in path:
                 number_grid(n-1, path + str(i))
-                    
-        
+
+
     number_grid(N)
     return paths
-

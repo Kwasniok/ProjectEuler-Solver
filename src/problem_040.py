@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_040(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 40
         self.input_format = (InputType.NUMBER_INT, 1, 9)
@@ -26,24 +26,23 @@ If dn represents the nth digit of the fractional part, find the value of the fol
 d10^0 × d10^1 × d10^2 × ... × d10^''' + dye_input_var(6) + '''
 [notation was changed but is equivalent to original]
 '''
-    
+
     def calculate(self, N):
-        
+
         res = 1
-        
+
         ds = ""
         i = 1
         max = 10**N
         while len(ds) < max:
-            
+
             ds += str(i)
             i += 1
-        
+
         for i in range(0, N):
 			#print(int(ds[10**i - 1]))
             res *= int(ds[10**i - 1])
-        
-        self.last_result = res
-        
-register_problem(Problem_040())
 
+        self.last_result = res
+
+register_problem(Problem_040())

@@ -12,7 +12,7 @@ from ppe_permutation import is_permutation_of
 from util import stringToCharList, charListToString
 
 class Problem_062(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 62
         self.input_format = (InputType.NUMBER_INT, 1, 5)
@@ -24,9 +24,9 @@ Find the smallest cube for which exactly ''' + dye_input_var("five") + ''' permu
 
 	def should_warn_long_execution_time(self):
 		return True
-		
+
     def calculate(self, N):
-        
+
         PS = None
         cs = [] # cubes as character lists
         n = 1
@@ -34,16 +34,16 @@ Find the smallest cube for which exactly ''' + dye_input_var("five") + ''' permu
         while cont:
             ci = n ** 3
             #print(ci)
-            
+
             ciList = stringToCharList(str(ci))
-            
+
             ps = 1
             for c in cs:
                 if is_permutation_of(ciList, c):
                     ps += 1
-            
+
             cs.append(ciList)
-            
+
             if ps == N:
                 PS = []
                 for c in cs:
@@ -51,14 +51,14 @@ Find the smallest cube for which exactly ''' + dye_input_var("five") + ''' permu
                         ci = int(charListToString(c))
                         PS.append(ci)
                 cont = False
-                        
+
             n += 1
-        
-        
+
+
         self.last_result = PS[0]
         self.last_result_details = PS
-        
+
     def details(self):
         return list_to_fancy_str(self.last_result_details, ", ", Colours.HIGHLIGHT)
-        
+
 register_problem(Problem_062())

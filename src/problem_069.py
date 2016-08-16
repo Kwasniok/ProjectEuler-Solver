@@ -12,7 +12,7 @@ from prime import next_prime
 from sys import float_info
 
 class Problem_069(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 69
         self.input_format = (InputType.NUMBER_INT, 2, None)
@@ -34,11 +34,11 @@ It can be seen that n=6 produces a maximum n/φ(n) for n ≤ 10.
 
 Find the value of n ≤ ''' + dye_input_var("1,000,000") + ''' for which n/φ(n) is a maximum.
 '''
-    
+
     def calculate(self, N):
-        
+
         # numbers created by multiplying all primes starting with 2 have more proper/distinct dividers than every lower number
-        
+
         pfs = []
         p = 2
         n = 1
@@ -46,15 +46,15 @@ Find the value of n ≤ ''' + dye_input_var("1,000,000") + ''' for which n/φ(n)
             n *= p
             pfs.append(p)
             p = next_prime(p)
-        
+
         self.last_result = n
         self.last_result_details = pfs
-        
+
     def details(self):
-        
+
         n = self.last_result
         pfs = self.last_result_details
-        
+
         # φ(n) = n  (1 - 1/p1) (1 - 1/p2) ... (1 - 1/pk) , where p1, p2, ..., pk are distinct prime factors of n
         f = 1.0 # = n / φ(n) ; work around to avoid float convertion for very large numbers
         mult = 1
@@ -65,5 +65,5 @@ Find the value of n ≤ ''' + dye_input_var("1,000,000") + ''' for which n/φ(n)
             f /= (1.0 - 1.0 / pf)
         tc = n / div * mult # = φ(n) ; same here
         return "n = " + dye_result_var(n) + ", φ(n) = " + str(tc) + ", n/φ(n) = " + dye_highlight(f)
-        
+
 register_problem(Problem_069())

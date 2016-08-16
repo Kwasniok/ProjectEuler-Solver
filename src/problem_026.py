@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_026(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 26
         self.input_format = (InputType.NUMBER_INT, 4, 4000)
@@ -30,49 +30,49 @@ Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be see
 
 Find the value of d  ''' + dye_input_var(1000) + " for which 1/d contains the longest recurring cycle in its decimal fraction part.\n"
 
-    
+
     def calculate(self, N):
-        
+
         res = 0
         res_details = []
         longest_reurring_cycle = -1
-        
+
         i = 2
         while i < N:
-            
+
             number_part = 10
             remainders = []
             r_cycle_not_found = True
-            
+
             while r_cycle_not_found:
-                
+
                 number_part = number_part % i
-                
+
                 if number_part == 0:
                     break
-                
+
                 for j in range(len(remainders)):
-                    
+
                     if number_part == remainders[j]:
-                        
+
                         if len(remainders) > longest_reurring_cycle:
                             longest_reurring_cycle = len(remainders)
                             res = i
                             res_details = [len(remainders), j]
-                            
+
                         r_cycle_not_found = False
                         break
-                    
+
                 remainders.append(number_part)
-                
+
                 number_part *= 10
-                
+
             i += 1
-                
-        
+
+
         self.last_result = res
         self.last_result_details = res_details
-        
+
     def details(self):
         f_str = "0."
         n  = self.last_result # number
@@ -88,7 +88,7 @@ Find the value of d  ''' + dye_input_var(1000) + " for which 1/d contains the lo
             np *= 10
             i += 1
         f_str += ")"
-            
+
         return "1/" + dye_result_var(self.last_result) + " = " + dye_highlight(f_str)
 
 register_problem(Problem_026())

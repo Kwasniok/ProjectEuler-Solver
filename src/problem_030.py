@@ -11,7 +11,7 @@ from problem_000 import *
 
 
 class Problem_030(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 30
         self.input_format = (InputType.NUMBER_INT, 2, 7)
@@ -26,7 +26,7 @@ As 1 = 1^4 is not a sum it is not included.
 The sum of these numbers is 1634 + 8208 + 9474 = 19316.
 
 Find the sum of all the numbers that can be written as the sum of ''' + dye_input_var("fifth") + " powers of their digits.\n"
-    
+
     def calculate(self, pow):
         sum = 0
         i = 2
@@ -41,7 +41,7 @@ Find the sum of all the numbers that can be written as the sum of ''' + dye_inpu
             if i == k:
                 sum += i
             i += 1
-            
+
         self.last_result = sum
-        
+
 register_problem(Problem_030())

@@ -12,7 +12,7 @@ from problem_059_cipher import cipher
 from collections import Counter
 
 class Problem_059(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 59
         self.description_str = '''Each character on a computer is assigned a unique code and the preferred standard is ASCII (American Standard Code for Information Interchange). For example, uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.
@@ -25,50 +25,50 @@ Unfortunately, this method is impractical for most users, so the modified method
 
 Your task has been made easy, as the encryption key consists of three lower case characters. Using cipher.txt, a file containing the encrypted ASCII codes, and the knowledge that the plain text must contain common English words, decrypt the message and find the sum of the ASCII values in the original text.
 '''
-    
+
     def calculate(self, unused):
-        
+
         sum = 0
-        
+
         key_len = 3
         key = []
-        
+
         for k in range(key_len):
-            
+
             cs = Counter()
             i = k
-            
+
             while i < len(cipher):
                 cs[cipher[i]] += 1
                 i += key_len
-                
+
             cipher_value_for_e = cs.most_common(1)[0][0]
-            
+
             key.append(cipher_value_for_e ^ ord(' '))
-        
+
         i = 0
         while i < len(cipher):
             c = cipher[i] ^ key[i % key_len]
             sum += c
             i += 1
-        
+
         self.last_result = sum
         self.last_result_details = key
-        
+
     def details(self):
         key = self.last_result_details
-        
+
         decipher = ""
         i = 0
         while i < len(cipher):
             c = cipher[i] ^ key[i % len(key)]
             decipher += chr(c)
             i += 1
-        
+
         key_chr = ""
         for k in key:
             key_chr += chr(k)
-            
+
         return "Original cipher:\n" + list_to_fancy_str(cipher, " ") + "\nDecoded text with key '" + list_to_fancy_str(key, ' ') + "' ('" + key_chr + "'):\n" + dye_highlight(decipher)
-        
+
 register_problem(Problem_059())

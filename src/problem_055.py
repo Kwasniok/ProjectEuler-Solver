@@ -11,7 +11,7 @@ from problem_000 import *
 from ppe_math import is_palindrome
 
 class Problem_055(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 55
         self.input_format = (InputType.NUMBER_INT, 1, 10000)
@@ -34,41 +34,41 @@ How many Lychrel numbers are there below ''' + dye_input_var("ten-thousand") + '
 
 NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
 '''
-    
+
     def calculate(self, N):
-        
+
         sum = 0
         sum_Details = []
-        
+
         def nextLychrelIteration(n):
             nStr_r = str(n)[::-1]
             return int(n + int(nStr_r))
-        
+
         n = 1
         while n < N:
-            
+
             isLychrel = True
             i = 0
             ni = n
             while isLychrel and i < 50:
-                
+
                 ni = nextLychrelIteration(ni)
-                
+
                 if is_palindrome(str(ni)):
                     isLychrel = False
-                
+
                 i += 1
-            
+
             if isLychrel:
                 sum += 1
                 sum_Details.append(n)
-            
+
             n += 1
-        
+
         self.last_result = sum
         self.last_result_details = sum_Details
-        
+
     def details(self):
         return "All Lychrel numbers below " + dye_input_var(self.last_input) + " are:\n" + list_to_fancy_str(self.last_result_details, ", ")
-        
+
 register_problem(Problem_055())

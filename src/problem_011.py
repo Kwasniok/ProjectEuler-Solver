@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_011(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 11
         self.input_format = (InputType.NUMBER_INT, 1, 20)
@@ -64,7 +64,7 @@ What is the greatest product of ''' + dye_input_var("four") + ''' adjacent numbe
                     [20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74,  4, 36, 16],
                     [20, 73, 35, 29, 78, 31, 90,  1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57,  5, 54],
                     [ 1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52,  1, 89, 19, 67, 48]]
-        
+
         '''
         self.grid =[[8,5,3,3,6],
                     [1,2,3,8,3],
@@ -72,24 +72,24 @@ What is the greatest product of ''' + dye_input_var("four") + ''' adjacent numbe
                     [7,0,4,0,9],
                     [2,3,7,2,0]]
         '''
-    
+
     def calculate(self, N):
-        
+
         grid = self.grid
         grid_width = len(grid[0])
         grid_height = len(grid)
-        
+
         res = -1
         res_details = None
-        
+
         i = 0
         while i < grid_width * grid_height:
-            
+
             r = int(i / grid_width) # column
             c =     i % grid_height # row
-            
+
             curr = None
-            
+
             # right
             if c + N - 1 < grid_width:
                 curr = 1
@@ -100,7 +100,7 @@ What is the greatest product of ''' + dye_input_var("four") + ''' adjacent numbe
                     res_details = []
                     for l in range(0, N):
                         res_details.append((r, c + l))
-                    
+
             # down
             if r + N - 1 < grid_height:
                 curr = 1
@@ -111,7 +111,7 @@ What is the greatest product of ''' + dye_input_var("four") + ''' adjacent numbe
                     res_details = []
                     for l in range(0, N):
                         res_details.append((r + l, c))
-            
+
             # diagonal right/down
             if c + N - 1 < grid_width and r + N - 1 < grid_height:
                 curr = 1
@@ -122,8 +122,8 @@ What is the greatest product of ''' + dye_input_var("four") + ''' adjacent numbe
                     res_details = []
                     for l in range(0, N):
                         res_details.append((r + l, c + l))
-                    
-            
+
+
             # diagonal right/up
             if c + N - 1 < grid_width and r - N + 1 > 0:
                 curr = 1
@@ -134,47 +134,47 @@ What is the greatest product of ''' + dye_input_var("four") + ''' adjacent numbe
                     res_details = []
                     for l in range(0, N):
                         res_details.append((r - l, c + l))
-            
+
             i += 1
-        
+
         self.last_result = res
         self.last_result_details = res_details
-            
-        
-    
+
+
+
     def details(self):
-        
+
         grid = self.grid
         grid_width = len(grid[0])
         grid_height = len(grid)
-        
+
         desc_str = ""
-        
+
         i = 0
         while i < grid_width * grid_height:
-            
+
             r = int(i / grid_width) # column
             c =     i % grid_height # row
-            
+
             # for alignment
             if grid[r][c] < 10:
                 desc_str += '0'
-            
+
             # print number
             if (r, c) in self.last_result_details:
                 desc_str += dye_highlight(grid[r][c])
             else:
                 desc_str += str(grid[r][c])
-            
+
             # gap between numbers
             desc_str += ' '
-            
+
             # new line / end of row
             if c + 1 == grid_width:
                 desc_str += '\n'
-                
+
             i += 1
-        
+
         return desc_str
-    
+
 register_problem(Problem_011())

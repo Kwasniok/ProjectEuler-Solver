@@ -9,9 +9,9 @@
 
 from problem_000 import *
 from math import log10
- 
+
 class Problem_018(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 18
         self.demo_triangle = [[3],
@@ -39,16 +39,16 @@ class Problem_018(Problem):
 That is, 3 + 7 + 4 + 9 = 23.
 
 Find the maximum total from top to bottom of the triangle below: \n\n''' + self.trinagle_to_str(self.triangle, 2) + "\n"
-    
+
     def calculate(self, unused):
-        
+
         def find_path(r, c):
             sum = self.triangle[r][c]
             best_path = [(r, c)]
-            
+
             # has next row
             if r+1 < len(self.triangle):
-                
+
                 l = find_path(r+1, c)
                 r = find_path(r+1, c+1)
                 if l >= r:
@@ -57,21 +57,21 @@ Find the maximum total from top to bottom of the triangle below: \n\n''' + self.
                 else:
                     sum += r[0]
                     best_path += r[1]
-                    
+
             return [sum, best_path]
-        
+
         path = find_path(0, 0)
-        
+
         self.last_result = path[0]
         self.last_result_details = path[1]
-        
+
     def trinagle_to_str(self, triangle, space_width, highlight = []):
         desc_str = ""
-        
+
         r = 0
         while r < len(triangle):
             desc_str += " " * space_width * (len(triangle) -1 - r)
-            
+
             c = 0
             while c < len(triangle[r]):
                 n = triangle[r][c]
@@ -83,15 +83,15 @@ Find the maximum total from top to bottom of the triangle below: \n\n''' + self.
                 else:
                     desc_str += nStr
                 desc_str += " " * space_width
-                
+
                 c += 1
-                
+
             desc_str += '\n'
             r += 1
-            
+
         return desc_str
-    
+
     def details(self):
         return self.trinagle_to_str(self.triangle, 2, self.last_result_details)
-   
+
 register_problem(Problem_018())

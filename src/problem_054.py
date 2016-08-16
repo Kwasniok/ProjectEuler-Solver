@@ -12,7 +12,7 @@ from problem_054_all_games import all_games
 from cards import poker_card_hand_stack_from_string, comparePokerCardHands
 
 class Problem_054(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 54
         self.description_str = '''In the card game poker, a hand consists of five cards and are ranked, from lowest to highest, in the following way:
@@ -37,13 +37,13 @@ Consider the following five hands dealt to two players:
 Hand         Player 1         Player 2         Winner
 1         5H 5C 6S 7S KD    2C 3S 8S 8D TD    Player 2
           Pair of Fives     Pair of Eights
-     
+
 2         5D 8C 9S JS AC    2C 5C 7D 8S QH    Player 1
         Highest card Ace  Highest card Queen
-         
+
 3         2D 9C AS AH AC    3D 6D 7D TD QD    Player 2
             Three Aces   Flush with Diamonds
-     
+
 4         4D 6S 9H QH QC    3D 6D 7H QD QS    Player 1
           Pair of Queens    Pair of Queens
         Highest card Nine Highest card Seven
@@ -56,12 +56,12 @@ The file, poker.txt, contains one-thousand random hands dealt to two players. Ea
 
 How many hands does Player 1 win?
 '''
-    
+
     def calculate(self, X):
-        
+
         sum = 0
         sum_Details = []
-        
+
         games = poker_card_hand_stack_from_string(all_games)
         g = 1 # for break points only
         for game in games:
@@ -72,11 +72,11 @@ How many hands does Player 1 win?
             if len(winner) == 1 and winner[0].hand == game[1]:
                 sum_Details.append(1)
             g += 1
-                
-        
+
+
         self.last_result = sum
         self.last_result_details = sum_Details
-        
+
     def details(self):
         desc_str = "game nr.   Player 1      vs.        Player 2\n"
         games = poker_card_hand_stack_from_string(all_games)
@@ -86,5 +86,5 @@ How many hands does Player 1 win?
             desc_str += str(g) + " : " + list_to_fancy_str(game, " vs. ", highlightColour = Colours.HIGHLIGHT, startHighlight = winner_is[g - 1], endHighlight = winner_is[g - 1]) + "\n"
             g += 1
         return desc_str
-    
+
 register_problem(Problem_054())

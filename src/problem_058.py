@@ -11,7 +11,7 @@ from problem_000 import *
 from prime import is_prime
 
 class Problem_058(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 58
         self.input_format = (InputType.NUMBER_INT, 0, 100)
@@ -30,31 +30,31 @@ It is interesting to note that the odd squares lie along the bottom right diagon
 
 If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed. If this process is continued, what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
 '''
-    
+
     def calculate(self, R):
-        
+
         R /= 100.0
-        
+
         l = 1 # spiral length
         n = 1 # current number
-        
+
         primes = 0.0
         total = 1.0
-        
+
         while primes / total >= R or l == 1:
-            
+
             for i in range(4):
-                
+
                 n += 2 * l
-                
+
                 if is_prime(n):
                     primes += 1.0
-            
+
             total += 4
             l += 1
-            
+
 			#print("l = " + str(l)  + ", p/t = " + str(primes / total))
-        
+
         self.last_result = 2 * l -1
-        
+
 register_problem(Problem_058())

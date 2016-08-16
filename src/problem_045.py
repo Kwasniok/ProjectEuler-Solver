@@ -11,7 +11,7 @@ from problem_000 import *
 from ppe_math import triangle_number, triangle_number_inverse, is_triangle_number, is_pentagonal_number, is_hexagonal_number
 
 class Problem_045(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 45
         self.input_format = (InputType.NUMBER_INT, 1, None)
@@ -26,20 +26,20 @@ It can be verified that T285 = P165 = H143 = ''' + dye_input_var(40755) + '''.
 
 Find the next triangle number that is also pentagonal and hexagonal.
 '''
-    
+
     def calculate(self, N):
-        
+
         n = int(triangle_number_inverse(N)) + 1
         t = triangle_number(n)
         while not (is_pentagonal_number(t) and is_hexagonal_number(t)):
             n += 1
             t = triangle_number(n)
-        
+
         self.last_result = t
         self.last_result_details = n
-        
+
     def details(self):
         n = self.last_result_details
         return "n = " + dye_highlight(n)
-        
+
 register_problem(Problem_045())

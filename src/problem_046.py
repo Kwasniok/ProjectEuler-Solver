@@ -12,7 +12,7 @@ from math import sqrt
 from prime import is_prime, next_prime
 
 class Problem_046(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 46
         self.description_str = '''It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
@@ -28,12 +28,12 @@ It turns out that the conjecture was false.
 
 What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 '''
-    
+
     def calculate(self, unused):
-        
+
         o = 9
         while True:
-            
+
             p = 2
             isCG = False
             while p < o:
@@ -42,15 +42,15 @@ What is the smallest odd composite that cannot be written as the sum of a prime 
                     isCG = True
                     break
                 p = next_prime(p)
-            
+
             if not isCG:
                     break
-            
+
             o += 2
             while is_prime(o):
                 o += 2
-        
+
         self.last_result = o
-        
-        
+
+
 register_problem(Problem_046())

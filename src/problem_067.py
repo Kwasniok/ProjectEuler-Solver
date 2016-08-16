@@ -12,7 +12,7 @@ from problem_067_triangle import triangle
 from math import log10
 
 class Problem_067(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 67
         self.demo_triangle = [[3],
@@ -29,9 +29,9 @@ Find the maximum total from top to bottom in triangle.txt, a 15K text file conta
 
 NOTE: This is a much more difficult version of Problem 18. It is not possible to try every route to solve this problem, as there are 2^99 altogether! If you could check one trillion (10^12) routes every second it would take over twenty billion years to check them all. There is an efficient algorithm to solve it. ;o)
         '''
-    
+
     def calculate(self, N):
-        
+
         # create empty copy of triangle
         dataTriangle = []
         for r in self.triangle:
@@ -39,14 +39,14 @@ NOTE: This is a much more difficult version of Problem 18. It is not possible to
             for c in r:
                 R.append(None)
             dataTriangle.append(R)
-        
+
         # copy last row
         c = 0
         lr = len(self.triangle) - 1 # last row
         while c < len(self.triangle[lr]):
             dataTriangle[lr][c] = self.triangle[lr][c]
             c += 1
-            
+
         # fill rows from bottom to top by adding the current value to the best sub path value
         r = lr - 1
         while r > -1:
@@ -59,9 +59,9 @@ NOTE: This is a much more difficult version of Problem 18. It is not possible to
                 dataTriangle[r][c] = sum
                 c += 1
             r -= 1
-        
+
         #print(self.trinagle_to_str(dataTriangle, len(str(dataTriangle[0][0]))))
-        
+
         # calculate path (for details only)
         r = 0
         c = 0
@@ -73,17 +73,17 @@ NOTE: This is a much more difficult version of Problem 18. It is not possible to
                 path.append((r + 1, c + 1))
                 c += 1
             r += 1
-            
+
         self.last_result = dataTriangle[0][0]
         self.last_result_details = path
-        
+
     def trinagle_to_str(self, triangle, space_width, highlight = []):
         desc_str = ""
-        
+
         r = 0
         while r < len(triangle):
             desc_str += " " * space_width * (len(triangle) -1 - r)
-            
+
             c = 0
             while c < len(triangle[r]):
                 n = triangle[r][c]
@@ -95,35 +95,35 @@ NOTE: This is a much more difficult version of Problem 18. It is not possible to
                 else:
                     desc_str += nStr
                 desc_str += " " * space_width
-                
+
                 c += 1
-                
+
             desc_str += '\n'
             r += 1
-            
+
         return desc_str
-    
+
     def details(self):
         return self.trinagle_to_str(self.triangle, 2, self.last_result_details)
-        
+
 register_problem(Problem_067())
 
 '''  attempt #2
 def findSubPath(n, av, r, c, path, sum):
             sum += self.triangle[r][c]
             path += [(r, c)]
-            
+
             if len(path) % n == 0:
                 if (float(sum) / float(len(path))) < av:
                     return [-1, None]
                 else:
                     return [sum, path]
                 #print(path)
-            
-            
+
+
             # has next row
             if r+1 < len(self.triangle):
-                
+
                 retL = findSubPath(n, av, r+1, c, list(path), sum)
                 retR = findSubPath(n, av, r+1, c+1, list(path), sum)
                 if retL[0] > retR[0]:
@@ -132,7 +132,7 @@ def findSubPath(n, av, r, c, path, sum):
                     return retR
             else:
                 return [sum, path]
-            
+
         def getAv(n, R, C):
             sum = 0.0
             count = 0.0
@@ -145,14 +145,14 @@ def findSubPath(n, av, r, c, path, sum):
                     c += 1
                 r += 1
             return sum / count
-        
+
         def find_path(n):
             path = [(0, 0)]
             sum = self.triangle[0][0]
             r = 0
             c = 0
             while r + 1 < len(self.triangle) - 1:
-                
+
                 subPathL = [-1, None]
                 subPathR = [-1, None]
                 av = getAv(n, r, c)
@@ -160,21 +160,21 @@ def findSubPath(n, av, r, c, path, sum):
                     subPathL = findSubPath(n, av, r + 1, c, [], 0)
                     subPathR = findSubPath(n, av, r + 1, c + 1, [], 0)
                     av -= 1.0
-                
+
                 if subPathL[0] > subPathR[0]:
                     sum += subPathL[0]
                     path += subPathL[1]
                 else:
                     sum += subPathR[0]
                     path += subPathR[1]
-                
+
                 r = path[len(path) - 1][0] # last row
                 c = path[len(path) - 1][1] # last column
-                
+
             return [sum, path]
-        
+
         path = find_path(N)
-        
+
         self.last_result = path[0]
         self.last_result_details = path[1]
 '''
@@ -187,24 +187,24 @@ def findSubPath(n, av, r, c, path, sum):
             for c in r:
                 sum += c
                 count += 1
-                
+
         av = float(sum) / float(count)
         global pc
         pc = 0
-        
+
         def find_path(r = 0, c = 0, path = [], sum = 0):
             sum += self.triangle[r][c]
             path += [(r, c)]
-            
+
             if len(path) % N == 0:
                 if (float(sum) / float(len(path))) < av:
                     return [-1, None]
                 #print(path)
-            
-            
+
+
             # has next row
             if r+1 < len(self.triangle):
-                
+
                 # can branch right
                 if c+1 < len(self.triangle[r+1]):
                     retL = find_path(r+1, c, list(path), sum)
@@ -219,10 +219,10 @@ def findSubPath(n, av, r, c, path, sum):
                 global pc
                 pc += 1
                 return [sum, path]
-        
+
         path = find_path()
         print(str(pc) + " => " + str(float(pc) / float(2**(len(triangle) - 1))))
-        
+
         self.last_result = path[0]
         self.last_result_details = path[1]
 '''

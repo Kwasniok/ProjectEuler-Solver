@@ -12,7 +12,7 @@ from math import sqrt
 from ppe_math import get_continued_fraction_for_sqrt_of
 
 class Problem_066(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 66
         self.input_format = (InputType.NUMBER_INT, 2, 10000)
@@ -37,38 +37,38 @@ Hence, by considering minimal solutions in x for D ≤ 7, the largest x is obtai
 
 Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of x for which the largest value of x is obtained.
 '''
-    
+
     def calculate(self, N):
-        
+
         D_min_max = None
         F_min_max = None
         D = N
         while D > 1:
-            
+
             if sqrt(D) % 1.0 != 0.0: # is not a square
-                
+
                 cf = get_continued_fraction_for_sqrt_of(D)
                 #print(cf)
-                
+
                 k = -1
                 while True:
-                    k += 1 
+                    k += 1
                     #print(k)
-                    
+
                     F = cf.getApproximation(k)
                     x = F.numerator
                     y = F.denominator
                     #print(F)
-                    
+
                     if x**2 - D*y**2 == 1:
                         #print(str(int(D)) + ";" + str(x))
                         if D_min_max == None or x > F_min_max.numerator:
                             D_min_max = D
                             F_min_max = F
                         break
-            
+
             D -= 1
-            
+
             '''
                 # x orientated (slower)
                 x = 2.0
@@ -76,14 +76,14 @@ Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of 
                      x += 1.0
                 #print(str(D) + ", " + str(x))
                 '''
-                
+
             '''
                 pfs = set(factorise(D))
                 # x orientated (faster?)
                 x = 1.0
                 while True:
                     x += 1.0
-                    
+
                     cont = False
                     for p in pfs:
                         if x % p == 0:
@@ -91,42 +91,42 @@ Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of 
                             break
                     if cont:
                         continue
-                    
+
                     y = sqrt((x ** 2 - 1) / D) % 1.0
-                    
+
                     if y % 1.0 == 0.0:
                         break
                 #print(str(D) + ", " + str(x))
                 '''
-                
+
             '''
                 # y orientated (mirrored version of x but faster(?), because x_min is always greater than y_min)
                 y = 1.0
                 while sqrt(1 + D * (y ** 2)) % 1.0 != 0.0:
                     #print("∆ = " + str((sqrt(1 + D * (y ** 2)) % 1.0) - 0.5))
                     y += 1.0
-                    
+
                 x = sqrt(1 + D * (y ** 2))
-                    
+
                 #f = x / y
                 #print(str(D) + ", x = " + str(x) + ", y = " + str(y) + ", f = " + str(f))
                 print(str(D) + ";" + str(x))
                 #if x < 10000:
                     #print(str(factorise(D)) + ";" + str(factorise(x)) + ";" + str(factorise(y)))
-                
-                
+
+
                 if D_min_max == None or x > x_min_max:
                     D_min_max = D
                     x_min_max = x
                 '''
-        
+
         self.last_result = D_min_max
         self.last_result_details = F_min_max
-        
+
     def details(self):
         D = self.last_result
         x = self.last_result_details.numerator
         y = self.last_result_details.denominator
         return "D = " + dye_result_var(D) + ", x = " + dye_highlight(x) + ", y = " + str(y)
-        
+
 register_problem(Problem_066())

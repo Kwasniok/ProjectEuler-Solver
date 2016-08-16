@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_002(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 2
         self.input_format = (InputType.NUMBER_INT, 0, 1000000000000)
@@ -21,20 +21,20 @@ class Problem_002(Problem):
 
 By considering the terms in the Fibonacci sequence whose values do not exceed ''' + dye_input_var("four million") + ''', find the sum of the even-valued terms
 '''
-    
+
     def calculate(self, N):
-        
+
         res = 0
         fib = 1
         fib_old = 1
         while fib < N:
-                
+
             fib_ = fib
             fib = fib + fib_old
             fib_old = fib_
             if fib%2 == 0:
                 res += fib
-                
+
         self.last_result = res
 
 register_problem(Problem_002())

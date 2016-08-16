@@ -11,7 +11,7 @@ from problem_000 import *
 from math import factorial
 
 class Problem_020(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 20
         self.input_format = (InputType.NUMBER_INT, 0, 100000)
@@ -22,16 +22,15 @@ For example, 10! = 10  9  ...  3  2  1 = 3628800,
 and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 
 Find the sum of the digits in the number ''' + dye_input_var(100) + "!\n"
-    
+
     def calculate(self, N):
-        
+
         res_str = str(factorial(N))
-        
+
         res = 0
         for c in res_str:
             res += int(c)
-        
+
         self.last_result = res
 
 register_problem(Problem_020())
-    

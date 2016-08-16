@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_025(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 25
         self.input_format = (InputType.NUMBER_INT, 2, 10000)
@@ -36,25 +36,24 @@ The 12th term, F12, is the first term to contain three digits.
 
 What is the first term in the Fibonacci sequence to contain ''' + dye_input_var(1000) + " digits?\n"
 
-    
+
     def calculate(self, N):
-        
+
         res = 0
         i = 1
         j = 1
         count = 2
-        
+
         while True:
             f = i + j
             j = i
             i = f
             count += 1
-            
+
             if len(str(i)) >= N:
                 res = count
                 break
-        
+
         self.last_result = res
-            
+
 register_problem(Problem_025())
-            

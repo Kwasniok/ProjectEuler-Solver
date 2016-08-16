@@ -12,7 +12,7 @@ from math import log10
 from prime import is_prime
 
 class Problem_037(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 37
         self.input_format = (InputType.NUMBER_INT, 1, 11)
@@ -23,19 +23,19 @@ Find the sum of the only ''' + dye_input_var("eleven") + ''' primes that are bot
 
 NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 '''
-    
+
     def calculate(self, N):
-        
+
         tps = 0 # amount of found truncated primes
         sum = 0
-        
+
         i = 10
         while True:
-            
+
             if is_prime(i):
-                
+
                 add = True
-                
+
                 # n backwards
                 nb = i
                 while nb != 0:
@@ -43,7 +43,7 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
                         add = False
                         break
                     nb /= 10
-                    
+
                 # n forwards
                 if add: # (for speed)
                     nf = i
@@ -53,7 +53,7 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
                             add = False
                             break
                         nf = nf % (10 ** int(log10(nf)))
-                
+
                 if add:
                     #print("HIT : %d" % i)
                     tps += 1
@@ -61,10 +61,9 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
                     if tps == N:
                         run = False
                         break
-                
+
             i += 1
-            
+
         self.last_result = sum
-        
+
 register_problem(Problem_037())
-    

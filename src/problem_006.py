@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_006(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 6
         self.input_format = (InputType.NUMBER_INT, 0, 1000000000)
@@ -25,19 +25,19 @@ Hence the difference between the sum of the squares of the first ten natural num
 
 Find the difference between the sum of the squares of the first ''' + dye_input_var("one hundred") +  " natural numbers and the square of the sum."
 
-    
+
     def calculate(self, N):
-        
+
         number = N
-        
+
         sum_of_sqrts = 0
         sqrt_of_sum = 0
-        
+
         for i in range(1, number + 1):
             sum_of_sqrts += i * i
         sqrt_of_sum = (int(number / 2 ) * (number +1))
         sqrt_of_sum *= sqrt_of_sum
-        
+
         self.last_result = sqrt_of_sum - sum_of_sqrts
 
 register_problem(Problem_006())

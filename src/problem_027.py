@@ -11,7 +11,7 @@ from problem_000 import *
 from prime import is_prime, next_prime
 
 class Problem_027(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 27
         self.input_format = (InputType.LIST_OF, (InputType.NUMBER_INT, 0, 5000), 1, 2)
@@ -32,24 +32,24 @@ where |n| is the modulus/absolute value of n
 e.g. |11| = 11 and |-4| = 4
 Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n = 0.'''
 
-    
+
     def calculate(self, Ns):
-        
+
         res = 0
         res_details = [0, 0, 0] # a, b, max n
-        
+
         Na = Ns[0]
         if len(Ns) == 1:
             Nb = Na
         else:
             Nb = Ns[1]
-        
+
         amount_of_primes = 0
         b = 2
         while b < Nb:
-            
+
             for a in range(-Na + 1, Na):
-                
+
                 n = -1
                 unfinished_plus = True
                 unfinished_minus = True
@@ -62,7 +62,7 @@ Find the product of the coefficients, a and b, for the quadratic expression that
                                 amount_of_primes = n
                                 res = a * b
                                 res_details = [a,b,n]
-                    
+
                     if unfinished_minus:
                         if not is_prime(n*n + a*n - b):
                             unfinished_minus = False
@@ -70,27 +70,27 @@ Find the product of the coefficients, a and b, for the quadratic expression that
                                 amount_of_primes = n
                                 rest = a * -b
                                 res_details = [a,-b,n]
-                    
+
                     n += 1
-                    
-            
+
+
             b = next_prime(b)
-            
+
         self.last_result = res
         self.last_result_details = res_details
-            
+
     def details(self):
         a = self.last_result_details[0]
         b = self.last_result_details[1]
         N = self.last_result_details[2]
         desc_str = "a = " + dye_highlight(a) + ", b = " + dye_highlight(b) + '\n'
         desc_str += "p(n) = n^2 + an + b\n\n"
-        
+
         n = 0
         while n < N + 1:
             desc_str += "p(" + str(n)  + ") = " + str(n**2 + a*n + b) + '\n'
             n += 1
-        
+
         return desc_str
-            
+
 register_problem(Problem_027())

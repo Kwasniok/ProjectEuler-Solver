@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_017(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 17
         self.input_format = (InputType.NUMBER_INT, 1, 9999)
@@ -21,9 +21,9 @@ If all the numbers from 1 to ''' + dye_input_var(1000) + ''' (one thousand) incl
 
 
 NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.'''
-    
+
     def calculate(self, N):
-        
+
         def get_len_single(number):
             #sum 36
             if number == 0:
@@ -34,7 +34,7 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
                 return 4
             if number == 3 or number == 7 or number == 8:
                 return 5
-        
+
         def get_len_ten_plus(number):
             #sum 72
             if number == 10:
@@ -47,7 +47,7 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
                 return 8
             if number == 17:
                 return 9
-            
+
         def get_len_double(number):
             if number < 10:
                 return get_len_single(number)
@@ -59,7 +59,7 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
                 return 5 + get_len_single(int(str(number)[-1]))
             if 69 < number and number < 80:
                 return 7 + get_len_single(int(str(number)[-1]))
-            
+
         def get_len_houndred(number):
             if number < 100:
                 return get_len_double(number)
@@ -67,7 +67,7 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
                 return get_len_single(int(str(number)[0])) + 7
             if 99 < number:
                 return get_len_single(int(str(number)[0])) + 10 + get_len_double(int(str(number)[1])*10 + int(str(number)[2]))
-            
+
         def get_len_thousand(number):
             if number < 1000:
                 return get_len_houndred(number)
@@ -75,14 +75,14 @@ NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-
                 return get_len_single(int(str(number)[0])) + 8
             if 999 < number:
                 return get_len_single(int(str(number)[0])) + 11 + get_len_houndred(int(str(number)[1])*100 + int(str(number)[2])*10 + int(str(number)[3]))
-        
+
         res = 0
         i = 1
         while i < N + 1 :
             string = str(i)
             res +=  get_len_thousand(i)
             i += 1
-            
+
         self.last_result = res
-        
+
 register_problem(Problem_017())

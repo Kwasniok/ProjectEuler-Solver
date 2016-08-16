@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_028(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 28
         self.input_format = (InputType.NUMBER_INT, 1, 1000000001)

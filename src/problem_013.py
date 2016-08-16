@@ -10,7 +10,7 @@
 from problem_000 import *
 
 class Problem_013(Problem):
-    
+
     def __init__(self):
         self.problem_nr = 13
         self.input_format = (InputType.NUMBER_INT, 1, 52)
@@ -118,31 +118,31 @@ class Problem_013(Problem):
         self.description_str = "Work out the first " + dye_input_var("ten") + " digits of the sum of the following one-hundred 50-digit numbers.\n\n"
         for i in self.ints:
             self.description_str += str(i) + "\n"
-    
+
     def calculate(self, N):
-        
+
         sum = 0
         for i in self.ints:
             sum += i
-            
+
         sum_str = str(sum)
-        
+
         res_len = N
         if len(sum_str) < N:
             res_len = len(sum_str)
-        
+
         res = ""
-        
+
         for i in range(res_len):
             res += sum_str[i]
-        
+
         self.last_result = int(res)
         self.last_result_details = sum_str
-        
-    
+
+
     def details(self):
         desc_str = "" + Colours.RESULTVAR
-        
+
         ended = False
         i = 0
         while i < len(self.last_result_details):
@@ -150,12 +150,12 @@ class Problem_013(Problem):
                 desc_str += Colours.END
                 ended= True
             desc_str += self.last_result_details[i]
-            
+
             i += 1
-            
+
         if not ended:
                 desc_str += Colours.END
-                
+
         return desc_str
-        
+
 register_problem(Problem_013())
