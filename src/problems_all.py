@@ -58,3 +58,4 @@ from problem_045 import *
 from problem_046 import *
 from problem_047 import *
 from problem_048 import *
+from problem_049 import *
