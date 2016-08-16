@@ -4,6 +4,7 @@ from math import sqrt, floor
 from sys import stdout
 import copy
 from util import list_to_fancy_str
+from prime import is_prime
 
 
 #############
@@ -55,28 +56,6 @@ def list_from_number(N):
 
 def is_even(number):
     return number % 2 == 0
-
-def is_prime(number):
-    if number < 2:
-        return False
-    i = 2
-    while i <= sqrt(number):
-        if number % i == 0:
-            return False
-        i +=1
-    return True
-
-def next_prime(n):
-    while True:
-        n += 1
-        if is_prime(n):
-            return n
-        
-def prev_prime(n):
-    while True:
-        n -= 1
-        if is_prime(n):
-            return n
 
 def is_abundant(number):
     return sum_of_all_proper_divisors_of(number) - number > number
@@ -186,21 +165,6 @@ def factorise(n):
     else:
         return lazy_factorise(n)
 
-def setOfPrimeFactors(n):
-    if n == 1:
-        return set()
-    else:
-        pfs = set()
-        p = 2
-        while n != 1:
-            if n % p == 0:
-                n /= p
-                pfs.add(p)
-                continue
-            p = next_prime(p)
-            
-        return pfs
-    
 def totient(n):
     dpfsn = set(lazy_factorise(n)) # distinct prime factors
     
