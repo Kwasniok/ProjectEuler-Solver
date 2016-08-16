@@ -35,11 +35,17 @@ class Sorted_Set():
 
     ## value of maxium
     def min(self):
-        return self.elements[0]
+        if len(self.elements) == 0:
+            return None
+        else:
+            return self.elements[0]
 
     ## value of minimum
     def max(self):
-        return self.elements[len(self.elements)-1]
+        if len(self.elements) == 0:
+            return None
+        else:
+            return self.elements[len(self.elements)-1]
 
     ## returns the index of the given element or None if it's not in the set
     def index_of(self, element):
