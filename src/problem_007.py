@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from prime import is_prime
+from prime import next_prime
 
 class Problem_007(Problem):
 
@@ -22,18 +22,12 @@ What is the ''' +  dye_input_var("10 001") + "st prime number?"
 
     def calculate(self, N):
 
-        res = 2
-        primeNr = 1
+        p = 2
+        nr = 1
+        while nr < N:
+            p = next_prime(p)
+            nr += 1
 
-        i = 3
-        while primeNr < N:
-
-            if is_prime(i):
-                primeNr += 1
-                if primeNr == N:
-                    res = i
-            i +=2
-
-        self.last_result = res
+        self.last_result = p
 
 register_problem(Problem_007())
