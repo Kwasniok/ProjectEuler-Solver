@@ -8,20 +8,46 @@
 #
 
 from math import sqrt
-from sorted_set import *
+from sorted_set import Sorted_Set
 
 # In this file prime numbers are defined as positive integers
 # which are dividable by no other natural number than 1 and itself.
 
+# cache for prime numbers
+# Cacheing is usefull if consecutive prime numbers (including the frist prime number) are used.
+# The cache must contain at least first three prime numbers!
+# Caching more than the frist two primes is worse in general.
+# But the cache can be filled with more primes if it's an improvement for a specific algorithm.
+# !!Make sure to reset the cache afterwards!!
+_cached_prime_range = Sorted_Set([2, 3])
+
 ## returns weather the integer is prime
 def is_prime(n):
+    # check lower bound for primes
     if n < 2:
         return False
+    # check if prime was cached
+    if n <= _cached_prime_range.max():
+        # n is in cached range
+        return n in _cached_prime_range
+    # n is unknown to prime cache and has to be calculated
     i = 2
-    while i <= sqrt(n):
+    cpi = 0
+    lim = sqrt(n)
+    # part 1 (with cache)
+    while i <= lim:
+        # n can be divided by i and is therefore not prime
         if n % i == 0:
             return False
-        i +=1
+        if cpi == len(_cached_prime_range) - 1:
+            break
+        cpi += 1
+        i = _cached_prime_range[cpi]
+    # part 2 (beyond cahce)
+    while i <= lim:
+        if n % i == 0:
+            return False
+        i += 2
     return True
 
 ## returns the next prime of the given integer
@@ -34,80 +60,35 @@ def next_prime(n):
 ## returns the previous prime number of the given integer
 # or None if there is none
 def prev_prime(n):
+    # check lower bound for primes
     if n <= 2:
         return None
-
     while True:
         n -= 1
         if is_prime(n):
             return n
 
-# cache for prime numbers
-_prime_ranges = []
+## chaces primes in given range
+# Caching more than the frist two primes is worse in general.
+# But the cache can be filled with more primes if it's an improvement for a specific algorithm.
+# !!Make sure to reset the cache afterwards!!
+def cache_primes_in_rage(max):
+    global _cached_prime_range
+    p = _cached_prime_range.max()
+    max = next_prime(max - 1)
+    while p <= max:
+        p = next_prime(p)
+        _cached_prime_range.elements.append(p)
+
+## reset the prime number cache
+def reset_prime_cache():
+    global _cached_prime_range
+    _cached_prime_range = Sorted_Set([2, 3])
 
 ## returns all prime numbers greater or equals to min and less or equals to max as a list in ascending order
 def get_primes_in_range(min, max):
-
-    min = next_prime(min - 1)
-    max = prev_prime(max + 1)
-
-    if max == None or max < min:
-        return []
-
-    prime_range_with_min = None
-    prime_range_with_max = None
-
-    # check for known range
-    for prime_range in _prime_ranges:
-        if prime_range.min() <= min and prime_range.max() >= max:
-            return [p for p in prime_range if p >= min and p <= max]
-        if min in prime_range:
-            prime_range_with_min = prime_range
-        if max in prime_range:
-            prime_range_with_max = prime_range
-
-    # search missing range for primes
-    search_min = min
-    search_max = max
-
-    if prime_range_with_min != None:
-        search_min = prime_range_with_min.max() + 1
-
-    if prime_range_with_max != None:
-        search_min = prime_range_with_min.min() - 1
-
-    search_primes = []
-    i = next_prime(search_min - 1)
-    while i <= search_max:
-        search_primes.append(i)
-        i = next_prime(i)
-
-    new_prime_range = Sorted_Set(search_primes)
-
-    # store new range and concatinate with overlapping ranges if necessary
-    if prime_range_with_min != None:
-        new_prime_range = new_prime_range | prime_range_with_min
-        _prime_ranges.remove(prime_range_with_min)
-
-    if prime_range_with_max != None:
-        new_prime_range = new_prime_range | prime_range_with_max
-        _prime_ranges.remove(prime_range_with_max)
-
-    _prime_ranges.append(new_prime_range)
-
-    # return primes in preferred section
-
-    # for empty range return empty list
-    if len(new_prime_range) == 0:
-        return []
-
-    # find preferred section in (concatinated) new range
-    start = 0 # index of first element greater or equal to min
-    end = len(new_prime_range) - 1 # index to last element les or equal to max plus one
-    while new_prime_range[start] < min:
-        start += 1
-    while new_prime_range[end] > max:
-        end -= 1
-    end += 1
-
-    return new_prime_range[start:end]
+    ps = []
+    p = next_prime(min - 1)
+    while p <= max:
+        ps.append(p)
+    return ps
