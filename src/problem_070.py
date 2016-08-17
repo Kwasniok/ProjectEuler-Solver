@@ -9,7 +9,7 @@
 
 from problem_000 import *
 from prime import next_prime
-from ppe_math import totient_from_prime_factors
+from ppe_math import totient_from_distinct_prime_factors
 from ppe_permutation import is_permutation_of_number
 from math import sqrt
 
@@ -66,7 +66,7 @@ Find the value of n, 1 < n < ''' + dye_input_var("10^7") + ''', for which φ(n) 
                     continue
 
                 # calculate totient and ratio
-                t = totient_from_prime_factors(n, ps)
+                t = totient_from_distinct_prime_factors(n, ps)
                 f = float(n) / float(t)
 
                 # check for minimum
@@ -137,7 +137,7 @@ Find the value of n, 1 < n < ''' + dye_input_var("10^7") + ''', for which φ(n) 
                     n *= p
 
                 # calculate totient and ratio
-                t = totient_from_prime_factors(n, ps)
+                t = totient_from_distinct_prime_factors(n, ps)
                 f = float(n) / float(t)
 
                 # check for minimum
@@ -166,7 +166,7 @@ Find the value of n, 1 < n < ''' + dye_input_var("10^7") + ''', for which φ(n) 
     def details(self):
         n = self.last_result
         ps = self.last_result_details
-        t = totient_from_prime_factors(n, ps)
+        t = totient_from_distinct_prime_factors(n, ps)
         f = float(n) / float(t)
         desc_str = "φ(" + dye_result_var(n) + ") = " + dye_highlight(t)  + "\n" + dye_result_var(n) + " / " + str(t) + " = " + dye_highlight(f)
 

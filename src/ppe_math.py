@@ -185,6 +185,8 @@ def factorise(n):
     else:
         return lazy_factorise(n)
 
+## returns the totient for the natural number n ≥ 1
+# this function implements: φ(n) = n * product[p is a prime factor of n]{1 - 1/p}
 def totient(n):
     dpfsn = set(lazy_factorise(n)) # distinct prime factors
 
@@ -196,12 +198,12 @@ def totient(n):
 
     return n * mult / div
 
-def totient_from_prime_factors(n, ps):
-    dpfsn = set(ps) # distinct prime factors
-
+## returns the totient for the natural number n ≥ 1 when the distinct prime factors are known
+# this function implements: φ(n) = n * product[p is a prime factor of n]{1 - 1/p}
+def totient_from_distinct_prime_factors(n, ps):
     mult = 1
     div = 1
-    for p in dpfsn:
+    for p in ps:
         mult *= p - 1
         div *= p
 
