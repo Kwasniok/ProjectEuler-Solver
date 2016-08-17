@@ -81,3 +81,4 @@ from problem_068 import *
 from problem_069 import *
 from problem_070 import *
 from problem_071 import *
+from problem_072 import *
