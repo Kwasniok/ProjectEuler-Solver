@@ -92,3 +92,40 @@ def get_primes_in_range(min, max):
     while p <= max:
         ps.append(p)
     return ps
+
+##returns a list of distinct prime factors of the natural number n
+def distinct_prime_factors(n):
+    if n == 1:
+        return []
+    else:
+        i = 2
+        cpi = 0
+        lim = sqrt(n)
+        # part 1 (with cache)
+        while i <= lim:
+            if n % i == 0:
+                # n can be divided by i
+                n /= i
+                # divide until n cannot be divided by i
+                while n % i == 0:
+                    n /= i
+                # calculate remaining distinct prime factors
+                ret =  distinct_prime_factors(n)
+                ret.append(i)
+                return ret
+            if cpi == len(_cached_prime_range) - 1:
+                break
+            cpi += 1
+            i = _cached_prime_range[cpi]
+        # part 2 (beyond cahce)
+        while i <= lim:
+            if n % i == 0:
+                n /= i
+                while n % i == 0:
+                    n /= i
+                ret =  distinct_prime_factors(n)
+                ret.append(i)
+                return ret
+            i += 2
+    # n has no dividor and is therefore prime
+    return [n]
