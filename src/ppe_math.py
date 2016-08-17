@@ -3,48 +3,11 @@
 from math import sqrt, floor
 import copy
 from prime import is_prime, next_prime
-
+from fraction import Fraction
 
 #############
 #-- BASIC --#
 #############
-
-class Fraction():
-
-    def __init__(self, numerator = 0, denominator = 1):
-        self.numerator = numerator
-        self.denominator = denominator
-
-    # comperision related methods
-
-    def __eq__(self, other):
-        return self.numerator == other.numerator and self.denominator == other.denominator
-
-    def __ne__(self, other):
-        return self.numerator != other.numerator or self.denominator != other.denominator
-
-    def __lt__(self, other):
-        return self.evaluate() < other.evaluate()
-
-    def __le__(self, other):
-        return self.evaluate() <= other.evaluate()
-
-    def __gt__(self, other):
-        return self.evaluate() > other.evaluate()
-
-    def __ge__(self, other):
-        return self.evaluate() >= other.evaluate()
-
-    # string related methods
-
-    def __str__(self):
-        return str(self.numerator) + "/" + str(self.denominator)
-
-    def __repr__(self):
-        return str(self)
-
-    def evaluate(self):
-        return float(self.numerator) / float(self.denominator)
 
 
 def number_from_list(L):
