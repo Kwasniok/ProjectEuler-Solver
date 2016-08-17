@@ -22,7 +22,29 @@ class Sorted_Set():
         return len(self.elements)
 
     def __contains__(self, element):
-        return element in self.elements
+
+        if len(self.elements) == 0:
+            return None
+
+        # binary search
+
+        l = 0
+        r = len(self.elements) - 1
+        m = None
+
+        while True:
+            # check if search was unsuccessful
+            if l > r:
+                return False
+            # set middle index
+            m = int((l + r) / 2)
+            # compare value with middle element (and move bounderies if necessary)
+            if self.elements[m] < element:
+                l = m + 1
+            elif self.elements[m] > element:
+                r = m - 1
+            else: # found element in sorted set
+                return True
 
     def __getitem__(self, index):
         return self.elements[index]
