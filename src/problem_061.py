@@ -8,8 +8,8 @@
 #
 
 from problem_000 import *
-from ppe_math import is_triangle_number, is_square_number, is_pentagonal_number, is_hexagonal_number, is_heptagonal_number, is_octagonal_number
-from ppe_math import triangle_number, square_number, pentagonal_number, hexagonal_number, heptagonal_number, octagonal_number
+from sequences import is_triangle_number, is_square_number, is_pentagonal_number, is_hexagonal_number, is_heptagonal_number, is_octagonal_number
+from sequences import triangle_number, square_number, pentagonal_number, hexagonal_number, heptagonal_number, octagonal_number
 
 class Problem_061(Problem):
 

@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import triangle_number, triangle_number_inverse, is_triangle_number, is_pentagonal_number, is_hexagonal_number
+from sequences import triangle_number, triangle_number_inverse, is_triangle_number, is_pentagonal_number, is_hexagonal_number
 
 class Problem_045(Problem):
 

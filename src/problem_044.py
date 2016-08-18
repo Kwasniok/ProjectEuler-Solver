@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import pentagonal_number, is_pentagonal_number
+from sequences import pentagonal_number, is_pentagonal_number
 from math import sqrt
 
 class Problem_044(Problem):
