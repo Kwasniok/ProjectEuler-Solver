@@ -68,58 +68,7 @@ Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of 
                         break
 
             D -= 1
-
-            '''
-                # x orientated (slower)
-                x = 2.0
-                while sqrt((x ** 2 - 1) / D) % 1.0 != 0.0:
-                     x += 1.0
-                #print(str(D) + ", " + str(x))
-                '''
-
-            '''
-                pfs = set(factorise(D))
-                # x orientated (faster?)
-                x = 1.0
-                while True:
-                    x += 1.0
-
-                    cont = False
-                    for p in pfs:
-                        if x % p == 0:
-                            cont = True
-                            break
-                    if cont:
-                        continue
-
-                    y = sqrt((x ** 2 - 1) / D) % 1.0
-
-                    if y % 1.0 == 0.0:
-                        break
-                #print(str(D) + ", " + str(x))
-                '''
-
-            '''
-                # y orientated (mirrored version of x but faster(?), because x_min is always greater than y_min)
-                y = 1.0
-                while sqrt(1 + D * (y ** 2)) % 1.0 != 0.0:
-                    #print("∆ = " + str((sqrt(1 + D * (y ** 2)) % 1.0) - 0.5))
-                    y += 1.0
-
-                x = sqrt(1 + D * (y ** 2))
-
-                #f = x / y
-                #print(str(D) + ", x = " + str(x) + ", y = " + str(y) + ", f = " + str(f))
-                print(str(D) + ";" + str(x))
-                #if x < 10000:
-                    #print(str(factorise(D)) + ";" + str(factorise(x)) + ";" + str(factorise(y)))
-
-
-                if D_min_max == None or x > x_min_max:
-                    D_min_max = D
-                    x_min_max = x
-                '''
-
+            
         self.last_result = D_min_max
         self.last_result_details = F_min_max
 
