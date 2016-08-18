@@ -110,7 +110,7 @@ How many continued fractions for N ≤ ''' + dye_input_var(10000) + ''' have an 
         # returns list of integer value pairs representing the continues fraction
         # format (an, (nsn, dn)) where nsn is the nth numerator summand and dn is the nth denominator as part of the intermediate fraction
         # first pair represents digit before point
-        def getContinuedFraction(s, ns = 0.0, d = 1.0, cfivps = None): # s := square, nf := numerator factor, ns := numerator summand, d := denominator, cfivps := continued fraction integer values pairs
+        def getContinuedFraction(s, ns = 0.0, d = 1.0, cfivps = None): # s := square, ns := numerator summand, d := denominator, cfivps := continued fraction integer values pairs
 
             if cfivps == None: # is first iteration
                 cfivps = []
