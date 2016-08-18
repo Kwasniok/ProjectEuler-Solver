@@ -2,7 +2,7 @@
 
 from math import sqrt, floor
 import copy
-from prime import is_prime, next_prime
+from prime import is_prime, next_prime, factorise, distinct_prime_factors
 from fraction import Fraction
 from number import get_digit_list
 
@@ -52,47 +52,26 @@ def is_pandigital(n, include_zero = False, base=10):
         d += 1
     return True
 
-# n must be an integer
-# a list is returned from witch the original value can be recreated by multiplying a variable initially set to 1 by each element of the list
-# otherwise 1 is skipped as factor
-def lazy_factorise(n):
-        if n == 1:
-            return []
-        else:
-            i = 2
-            while i < n + 1:
-                # n can be divided by i
-                if is_prime(i) and n % i == 0:
-                    return [i] + lazy_factorise(n / i)
-                i += 1
-
-# n must be an integer
-# a list is returned from witch the original value can be recreated by multiplying a variable initially set to 1 by each element of the list
-# a list containing a zero represents 0
-# -1 is returned as leading factor, if n was negative
-# otherwise 1 is skipped as factor
-def factorise(n):
-    if type(n) != int:
-        return None
-
-    if n == 0:
-        return [0]
-
-    negative = n < 0
-
-    if negative:
-        return [-1] + lazy_factorise(-n)
+## extension of factorise for integers
+# includes a leading -1 if i is negative
+# see: factorise in prime.py
+def factorise_int(i):
+    if i < 0:
+        # i is negative
+        ret = factorise(-i)
+        ret[0:0] = [-1]
+        return ret
     else:
-        return lazy_factorise(n)
+        return factorise(i)
 
 ## returns the totient for the natural number n ≥ 1
 # this function implements: φ(n) = n * product[p is a prime factor of n]{1 - 1/p}
 def totient(n):
-    dpfsn = set(lazy_factorise(n)) # distinct prime factors
 
+    n_dpfs = distinct_prime_factors(n)
     mult = 1
     div = 1
-    for p in dpfsn:
+    for p in n_dpfs:
         mult *= p - 1
         div *= p
 

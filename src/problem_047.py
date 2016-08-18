@@ -8,8 +8,7 @@
 #
 
 from problem_000 import *
-from prime import next_prime
-from ppe_math import factorise
+from prime import next_prime, factorise
 from util import list_to_fancy_str
 from choose import num_of_choose_variations, choose
 
