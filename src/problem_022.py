@@ -7,8 +7,8 @@
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
-from ppe_math import worth_of_string
 from problem_000 import *
+from ppe_string import worth_of_string
 import problem_022_names
 
 class Problem_022(Problem):

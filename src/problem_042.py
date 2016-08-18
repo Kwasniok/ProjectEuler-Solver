@@ -9,7 +9,7 @@
 
 from problem_000 import *
 from problem_042_words import words
-from ppe_math import worth_of_string
+from ppe_string import worth_of_string
 from math import sqrt
 
 class Problem_042(Problem):
