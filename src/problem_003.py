@@ -20,23 +20,23 @@ class Problem_003(Problem):
 What is the largest prime factor of the number ''' + dye_input_var(600851475143) + "?."
 
     def fac_of_number(self, number):
-        dividors = []
+        divisors = []
 
         i = 2
         while i < number:
             if number % i == 0:
                 k = self.fac_of_number(i)
                 for l in k:
-                    dividors.append(l)
+                    divisors.append(l)
                 m = self.fac_of_number(int(number / i))
                 for n in m:
-                    dividors.append(n)
-                return dividors
+                    divisors.append(n)
+                return divisors
 
             i += 1
 
-        dividors.append(number)
-        return dividors
+        divisors.append(number)
+        return divisors
 
     def calculate(self, N):
 
