@@ -106,78 +106,65 @@ def highest_common_factor(n, m):
 def are_relative_prime(n, m):
     return highest_common_factor(n, m) == 1
 
-################
-#-- Dividors --#
-################
-
-def number_of_divisors(number):
+## returns the amount of proper divisors of the natural number n
+def number_of_divisors(n):
     divs = 0
     i = 1
-    while i <= sqrt(number):
+    while i <= sqrt(n):
         if number % i == 0:
             divs += 1
         i += 1
-
     divs *= 2
-
     return divs
 
-def list_of_divisors(number):
+## returns a list of divisors of the natural number n in ascending order
+# note: includes trivial divisor n and 1
+# see list_of_proper_divisors
+def list_of_divisors(n):
     divs = []
     i = 1
-    while i <= sqrt(number):
-        if number % i == 0:
-            divs.append(i)
-            divs.append(number / i)
-        i += 1
-
-    divs.sort()
-
-    return divs
-
-def set_of_proper_divisors(number):
-    divs = set()
-    i = 2
-    s = sqrt(number)
+    s = sqrt(n)
     while i < s:
-        if number % i == 0:
-            divs.add(i)
-            divs.add(number / i)
+        if n % i == 0:
+            divs.append(i)
+            divs.append(n / i)
         i += 1
-
-    if number % s == 0:
-        divs.add(int(s))
-
+    if n % s == 0:
+        divs.append(int(s))
+    divs.sort()
     return divs
 
-def all_proper_divisors_of(number):
-    divsA = []
-    divsB = []
-    i = 1
-    while i <= sqrt(number):
-        if number % i == 0:
-            divsA.append(i)
-        i += 1
-
-    for k in range(len(divsA), 0, -1):
-        if divsA[k-1] < sqrt(number):
-            divsB.append(int(number/divsA[k-1]))
-
-    return divsA + divsB #sorted array
-
-
-def sum_of_all_proper_divisors_of(number):
-    sumOfDivs = 1
-
+## returns a list of divisors of the natural number n in ascending order
+# note: excludes trivial divisor n, includes proper divisor 1
+# see list_of_divisors
+def list_of_proper_divisors(n):
+    divs = [1]
     i = 2
-    while i <= sqrt(number):
-        if number % i == 0:
-            sumOfDivs += i
-            if i < sqrt(number):
-                sumOfDivs += int(number/i)
+    s = sqrt(n)
+    while i < s:
+        if n % i == 0:
+            divs.append(i)
+            divs.append(n / i)
         i += 1
+    if n % s == 0 and n != 1:
+        divs.append(int(s))
+    divs.sort()
+    return divs
 
-    return sumOfDivs
+## returns sum of divisors all of the natural number n in ascending order
+# note: excludes trivial divisor n, includes proper divisor 1
+# see list_of_proper_divisors
+def sum_of_proper_divisors(n):
+    sum = 1
+    i = 2
+    s = sqrt(n)
+    while i < s:
+        if n % i == 0:
+            sum += i + n/i
+        i += 1
+    if n % s == 0 and n != 1:
+        sum += int(s)
+    return sum
 
 #################
 #-#   BASE    #-#

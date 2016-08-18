@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import sum_of_all_proper_divisors_of
+from ppe_math import sum_of_proper_divisors
 
 class Problem_021(Problem):
 
@@ -30,8 +30,8 @@ Evaluate the sum of all the amicable numbers under ''' + dye_input_var(self.defa
 
         i = 2
         while i < N:
-            spdi = sum_of_all_proper_divisors_of(i)
-            if sum_of_all_proper_divisors_of(spdi) == i:
+            spdi = sum_of_proper_divisors(i)
+            if sum_of_proper_divisors(spdi) == i:
                 ami += i
             if spdi == i:
                 self_ami += i
