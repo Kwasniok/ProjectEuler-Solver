@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import number_from_list
+from number import number_from_digit_list
 from ppe_permutation import get_permutation, num_of_permutations
 
 class Problem_024(Problem):
@@ -29,7 +29,7 @@ What is the ''' + dye_input_var("millionth") + " lexicographic permutation of th
         list = range(10)
         permutation = get_permutation(P -1, list)
 
-        self.last_result = number_from_list(permutation)
+        self.last_result = number_from_digit_list(permutation)
         self.last_result_details = permutation
 
     def details(self):

@@ -5,34 +5,6 @@ import copy
 from prime import is_prime, next_prime
 from fraction import Fraction
 
-#############
-#-- BASIC --#
-#############
-
-
-def number_from_list(L):
-    n = 0
-    for d in L:
-        n *= 10
-        n += int(d)
-    return n
-
-def list_from_number(N):
-    if N == 0:
-        return [0]
-
-    l = []
-
-    if N < 0:
-        N = -N
-        l[0:0] = ['-']
-
-    while N != 0:
-        l[0:0] = [N % 10]
-        N /= 10
-
-    return l
-
 ##################
 #-# PROPERTIES #-#
 ##################
@@ -45,39 +17,6 @@ def is_abundant(number):
 
 def is_deficient(number):
     return sum_of_all_proper_divisors_of(number) - number < number
-
-# n must be an positive integer
-def get_digits_as_list(N):
-
-    if type(N) != int or N < 0:
-        return None
-
-    if N == 0:
-        return [0]
-
-    Ds = []
-    while N != 0:
-        Ds[0:0] = [N % 10]
-        N /= 10
-
-    return Ds
-
-# converts a list of positive integers to a number
-def number_from_digit_list(Ds):
-
-    if type(Ds) != list:
-        return None
-
-    n = 0
-    for d in Ds:
-        if type(d) != int or d < 0:
-            n = None
-            break
-        else:
-            n *= 10
-            n += d
-
-    return n
 
 # n must be an positive integer
 def is_pandigital(n, include_zero = False):

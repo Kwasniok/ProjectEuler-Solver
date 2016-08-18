@@ -2,6 +2,7 @@
 #-- my_permutation.py --#
 
 from ppe_math import faculty
+from number import get_digit_list
 import copy
 
 '''
@@ -111,7 +112,7 @@ def list_from_number(N):
 
 # p and E must be integers
 def is_permutation_of_number(p, N):
-    return is_permutation_of(list_from_number(p), list_from_number(N))
+    return is_permutation_of(get_digit_list(p), get_digit_list(N))
 
 
 # p and E must be lists

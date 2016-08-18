@@ -11,7 +11,7 @@
 from problem_000 import *
 from math import log10
 from prime import is_prime
-from ppe_math import get_digits_as_list, number_from_digit_list
+from number import get_digit_list, number_from_digit_list
 from sys import maxint
 from ppe_permutation import all_rotations
 
@@ -74,7 +74,7 @@ How many circular primes are there below ''' + dye_input_var("one million") + "?
                 if n >= N:
                     break
 
-                Ds = get_digits_as_list(n)
+                Ds = get_digit_list(n)
                 add = True
                 for r in all_rotations(Ds):
                     # current rotation

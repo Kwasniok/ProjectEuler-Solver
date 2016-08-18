@@ -10,7 +10,7 @@
 from problem_000 import *
 from ppe_permutation import num_of_permutations, get_permutation
 from prime import is_prime
-from ppe_math import number_from_list
+from number import number_from_digit_list
 
 class Problem_041(Problem):
 
@@ -30,11 +30,11 @@ What is the largest n-digit pandigital prime that exists?
             #print(str(ds))
             Ds = range(1, ds + 1)
             nop = num_of_permutations(Ds)
-            n = number_from_list(Ds)
+            n = number_from_digit_list(Ds)
             i = 0
             while i < nop and not is_prime(n):
                 i += 1
-                n = number_from_list(get_permutation(nop - i, Ds))
+                n = number_from_digit_list(get_permutation(nop - i, Ds))
                 #print(str(n) + " " + str(is_prime(n)))
             if is_prime(n):
                 largest = n

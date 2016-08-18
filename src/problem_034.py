@@ -8,7 +8,8 @@
 #
 
 from problem_000 import *
-from ppe_math import faculty, get_digits_as_list
+from number import get_digit_list
+from ppe_math import faculty
 
 class Problem_034(Problem):
 
@@ -30,7 +31,7 @@ Note: as 1! = 1 and 2! = 2 are not sums they are not included.
         while i < N:
             i += 1
 
-            Ds = get_digits_as_list(i)
+            Ds = get_digit_list(i)
 
             sum = 0
             for d in Ds:

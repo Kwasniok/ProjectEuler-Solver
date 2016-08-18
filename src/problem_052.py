@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import list_from_number
+from number import get_digit_list
 
 class Problem_052(Problem):
 
@@ -33,12 +33,12 @@ Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain
 
             #print(n)
 
-            nList = list_from_number(n)
+            nList = get_digit_list(n)
 
             i = 2
             while i <= N:
 
-                niList = list_from_number(n * i)
+                niList = get_digit_list(n * i)
 
                 l = 0
                 while l < 10:
