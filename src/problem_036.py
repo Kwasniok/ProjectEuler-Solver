@@ -9,7 +9,6 @@
 
 from problem_000 import *
 from ppe_math import is_palindrome
-from number import int_to_string
 
 class Problem_036(Problem):
 
@@ -29,12 +28,7 @@ Find the sum of all numbers, less than ''' + dye_input_var("one million") + ''',
         sum = 0
 
         for i in range(1, N):
-
-            # get representations as strings
-            d = int_to_string(i, 10)
-            b = int_to_string(i,  2)
-
-            if is_palindrome(d) and is_palindrome(b):
+            if is_palindrome(i, 10) and is_palindrome(i, 2):
                 sum += i
                 #print("%s <--> %s" % (d, b))
 

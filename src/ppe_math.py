@@ -52,6 +52,18 @@ def is_pandigital(n, include_zero = False, base=10):
         d += 1
     return True
 
+## returns wheather the natural number in i a palindrome (in given base)
+# n is palindrome in base b :<=> digits of n are symmetric in base b
+# (first digit equals last, second digit equals second to last, etc.)
+def is_palindrome(n, base=10):
+    # convert n to list of its digits in given base
+    n_ds = get_digit_list(n, base)
+    # compare digits in list
+    for i in range(0, len(n_ds) / 2):
+        if n_ds[i] != n_ds[-(i+1)]:
+            return False
+    return True
+
 ## extension of factorise for integers
 # includes a leading -1 if i is negative
 # see: factorise in prime.py
@@ -165,20 +177,6 @@ def sum_of_proper_divisors(n):
     if n % s == 0 and n != 1:
         sum += int(s)
     return sum
-
-#################
-#-#  SPECIAL  #-#
-#################
-
-def is_palindrome(E):
-
-    if type(E) != list and type(E) != str:
-        return None
-
-    for i in range(0, len(E) / 2):
-        if E[i] != E[-(i+1)]:
-            return False
-    return True
 
 #################
 #-# SEQUENCES #-#
