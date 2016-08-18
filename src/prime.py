@@ -120,7 +120,7 @@ def factorise(n):
                 ret.append(i)
                 return ret
             i += 2
-    # n has no dividor and is therefore prime
+    # n has no divisor and is therefore prime
     return [n]
 
 def distinct_prime_factors(n):
@@ -156,5 +156,5 @@ def distinct_prime_factors(n):
                 ret.append(i)
                 return ret
             i += 2
-    # n has no dividor and is therefore prime
+    # n has no divisor and is therefore prime
     return [n]

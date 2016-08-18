@@ -15,12 +15,12 @@ def is_even(number):
     return number % 2 == 0
 
 ## returns True if the natural number n is abundant
-# note n is abundant :<=> sum of proper dividors of n minus n is greater than n
+# note n is abundant :<=> sum of proper divisors of n minus n is greater than n
 def is_abundant(number):
     return sum_of_all_proper_divisors_of(number) - number > number
 
 ## returns True if the natural number n is deficient
-# note n is deficient :<=> sum of proper dividors of n minus n is less than n
+# note n is deficient :<=> sum of proper divisors of n minus n is less than n
 def is_deficient(number):
     return sum_of_all_proper_divisors_of(number) - number < number
 
