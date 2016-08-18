@@ -107,51 +107,6 @@ def are_relative_prime(n, m):
     return highest_common_factor(n, m) == 1
 
 ################
-#-- Fractions --#
-################
-
-# a must be an integer other than 0
-# b must be an integer other than 0
-# a pair is returned representing the simplified fraction
-def simplify_fraction_dec(n, d):
-    if type(n) != int or type(d) != int or d == 0:
-        return None
-
-    if n == 1 or d == 1: # for performance only
-        return (n, d)
-
-    # get prime factors
-    pfsn = factorise(n)
-    pfsd = factorise(d)
-
-    # cancel prime factors (new prime factors)
-    npfsa = copy.copy(pfsn)
-    npfsb = copy.copy(pfsd)
-
-    for x in pfsd:
-        try:
-            npfsa.remove(x)
-        except:
-            pass
-
-    for x in pfsn:
-        try:
-            npfsb.remove(x)
-        except:
-            pass
-
-    # create simplified fraction
-    n = 1
-    d = 1
-    for x in npfsa:
-        n *= x
-    for x in npfsb:
-        d *= x
-
-    return (n, d)
-
-
-################
 #-- Dividors --#
 ################
 

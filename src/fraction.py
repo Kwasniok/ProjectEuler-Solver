@@ -7,6 +7,9 @@
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
+from math import sqrt
+from prime import next_prime
+
 ## class representing a fraction
 class Fraction():
 
@@ -44,3 +47,12 @@ class Fraction():
 
     def evaluate(self):
         return float(self.numerator) / float(self.denominator)
+
+    def simplify(self):
+        p = 2
+        lim = min(self.numerator, self.denominator)
+        while p <= lim:
+            while self.numerator % p == 0 and self.denominator % p == 0:
+                self.numerator /= p
+                self.denominator /= p
+            p = next_prime(p)

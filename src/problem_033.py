@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import simplify_fraction_dec
+from fraction import Fraction
 
 class Problem_033(Problem):
 
@@ -74,12 +74,14 @@ If the product of these four fractions is given in its lowest common terms, find
 
         if counter == 0:
             N = 0
-        F = simplify_fraction_dec(int(N), int(D))
-        self.last_result_details = [int(N), int(D), F]
-        self.last_result = F[1]
+        F = Fraction(int(N), int(D))
+        F_simplified = Fraction(int(N), int(D))
+        F_simplified.simplify()
+        self.last_result_details = [F, F_simplified]
+        self.last_result = F_simplified.denominator
 
     def details(self):
-        return "The fraction " + str(self.last_result_details[0]) + "/" + str(self.last_result_details[1]) + " was simplified to " + str(self.last_result_details[2][0]) + "/" + dye_result_var(self.last_result_details[2][1]) + "."
+        return "The fraction " + str(self.last_result_details[0]) + " was simplified to " + str(self.last_result_details[2]) + "."
 
 
 register_problem(Problem_033())
