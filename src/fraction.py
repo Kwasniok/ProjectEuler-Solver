@@ -37,6 +37,47 @@ class Fraction():
     def __ge__(self, other):
         return self.evaluate() >= other.evaluate()
 
+    # operators
+
+    def __add__(self, other):
+        return Fraction(self.numerator * other.denominator + other.numerator * self.denominator, self.denominator * other.denominator)
+
+    def __sub__(self, other):
+        return Fraction(self.numerator * other.denominator - other.numerator * self.denominator, self.denominator * other.denominator)
+
+    def __mul__(self, other):
+        return Fraction(self.numerator * other.numerator, self.denominator * other.denominator)
+
+    def __div__(self, other):
+        return Fraction(self.numerator * other.denominator, self.denominator * other.numerator)
+
+    # augmented operators
+
+    def __iadd__(self, other):
+        self.numerator = self.numerator * other.denominator + other.numerator * self.denominator
+        self.denominator *= other.denominator
+        return self
+
+    def __isub__(self, other):
+        self.numerator = self.numerator * other.denominator - other.numerator * self.denominator
+        self.denominator *= other.denominator
+        return self
+
+    def __imul__(self, other):
+        self.numerator *= other.numerator
+        self.denominator *= other.denominator
+        return self
+
+    def __idiv__(self, other):
+        self.numerator *= other.denominator
+        self.denominator *= other.numerator
+        return self
+
+    def invert(self):
+        tmp = self.numerator
+        self.numerator = self.denominator
+        self.denominator = tmp
+
     # string related methods
 
     def __str__(self):
