@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_math import simplify_fraction_dec, highest_common_factor
+from ppe_math import highest_common_factor
 from fraction import Fraction
 
 class Problem_071(Problem):
