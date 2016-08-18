@@ -1,6 +1,13 @@
-#coding=UTF_8
+#   coding=UTF_8
+#
+#   ppe_math.py
+#   ProjectEuler
+#
+#   This file was created by Jens Kwasniok on 18.08.16.
+#   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
+#
 
-from math import sqrt, floor
+from math import sqrt
 import copy
 from prime import is_prime, next_prime, factorise, distinct_prime_factors
 from fraction import Fraction
@@ -32,7 +39,6 @@ def is_pandigital(n, include_zero = False, base=10):
     n_digits = get_digit_list(n)
     # optimized compare
     if len(n_digits) != base - 1 + int(include_zero):
-        print "ne"
         return False
     d = 1 - int(include_zero)
     while d < base:
@@ -41,13 +47,11 @@ def is_pandigital(n, include_zero = False, base=10):
         for n_d in n_digits:
             if n_d == d:
                 if appeared_once:
-                    print "o"
                     # d appeares twice in n
                     return False
                 appeared_once = True
         if not appeared_once:
             # d does not appear in n
-            print "t"
             return False
         d += 1
     return True
@@ -79,14 +83,12 @@ def factorise_int(i):
 ## returns the totient for the natural number n ≥ 1
 # this function implements: φ(n) = n * product[p is a prime factor of n]{1 - 1/p}
 def totient(n):
-
     n_dpfs = distinct_prime_factors(n)
     mult = 1
     div = 1
     for p in n_dpfs:
         mult *= p - 1
         div *= p
-
     return n * mult / div
 
 ## returns the totient for the natural number n ≥ 1 when the distinct prime factors are known
@@ -97,7 +99,6 @@ def totient_from_distinct_prime_factors(n, ps):
     for p in ps:
         mult *= p - 1
         div *= p
-
     return n * mult / div
 
 ## returns the highest common factor
@@ -106,7 +107,6 @@ def highest_common_factor(n, m):
     #eclidian algorithm
     a = max(n, m)
     b = min(n, m)
-
     while True:
         r = a % b
         if r == 0:
@@ -178,93 +178,21 @@ def sum_of_proper_divisors(n):
         sum += int(s)
     return sum
 
-#########################
-#-# COMPUTING METHODS #-#
-#########################
+#############
+# FUNCTIONS #
+#############
 
-################
-#-- for math --#
-################
+## returns n! for the natural number 0 ≤ n
+def faculty(n):
+    if n == 0:
+        return 1
+    ret = 1
+    while n != 1:
+        ret *= n
+        n -= 1
+    return ret
 
-def faculty(number):
-    i = 1
-    for j in range(number):
-        i *= j+1
-    return i
-
-def binomial_coefficient(n,k):
-	if n >= k:
-		return faculty(n) / (faculty(k)*faculty(n-k))
-########################
-#-- for permutations --#
-########################
-
-#------------------------------#
-# complex & calculating method #
-#------------------------------#
-
-class Permutation():
-
-    def all_permutations_from_list(E):
-        list = []
-        for i in range(faculty(len(E))):
-            list.append(Permutation.permutation_from_list(i, E))
-        return list
-
-
-    def permutation_from_list(n, e):
-
-        DigitNumber = int((n % faculty(len(e)))/faculty(len(e)-1))
-
-        D = e[DigitNumber]
-
-        if len(e) > 1:
-            e2 = copy.copy(e)
-            del(e2[DigitNumber])
-            D += Permutation.permutation_from_list(n, e2)
-
-        return D
-
-#-----------------------#
-# easy & stupid methods #
-#-----------------------#
-
-def abc_grid_for(N=3):
-
-    paths = []
-    all = ""
-
-    for c in range(1, N+1):
-        all += character_for_int(c)
-
-    def ABCGrid(n, path=""):
-        if n == 0:
-            paths.append(path)
-
-        for i in range(1, N+1):
-            if not character_for_int(i) in path:
-                ABCGrid(n-1, path + character_for_int(i))
-
-
-    ABCGrid(N)
-    return paths
-
-def number_grid_for(N=3):
-
-    paths = []
-    all = ""
-
-    for c in range(0, N):
-        all += str(c)
-
-    def number_grid(n, path=""):
-        if n == 0:
-            paths.append(path)
-
-        for i in range(0, N):
-            if not str(i) in path:
-                number_grid(n-1, path + str(i))
-
-
-    number_grid(N)
-    return paths
+## returns nCr
+def binomial_coefficient(n,r):
+	if n >= r:
+		return faculty(n) / (faculty(r)*faculty(n-r))
