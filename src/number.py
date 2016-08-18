@@ -7,6 +7,46 @@
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
+######################
+# INTEGER <-> STRING #
+######################
+
+# used for digit to char conversion
+_digits_for_base = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+## returns the character representing the digit d
+# note: d is limited to integers in range 0 ≤ d ≤ 35
+def get_char_for_digit(d):
+    if d < 0 or d > 35:
+        return None
+    return _digits_for_base[d]
+
+## returns the digit corresponding to the character c
+# note: c must be a single character from range 0-9 or A-Z (capital characters only!)
+def get_digit_for_char(c):
+    i = 0
+    while i < 36:
+        if c == _digits_for_base[i]:
+            return i
+        i += 1
+    return None
+
+## returns the string reresenting i in given base
+# optional paramerter base must be a nautral number in range 2 ≤ base ≤ 35
+def int_to_string(i, base=10):
+    if i == 0:
+        return '0'
+    is_negative = i < 0
+    i_str = ''
+    if is_negative:
+        i = -i
+    while i != 0:
+        i_str = get_char_for_digit(i % base) + i_str
+        i /= base
+    if is_negative:
+        i_str = '-' + i_str
+    return i_str
+
 #####################################
 # NUMBER <-> NUMBER LIST CONVERSION #
 #####################################

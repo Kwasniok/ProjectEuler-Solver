@@ -167,33 +167,6 @@ def sum_of_proper_divisors(n):
     return sum
 
 #################
-#-#   BASE    #-#
-#################
-
-_digits_for_base_ = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-def get_digit_as_char(d):
-
-    if type(d) != int or d < 0 or d > 35:
-        return None
-
-    return _digits_for_base_[d]
-
-# get positive integer N in Base b as a string
-def inBase(N, b):
-
-    if type(N) != int or type(b) != int or N < 0 or b < 0:
-        return None
-
-    if N == 0:
-        return '0'
-
-    n = ''
-    while N != 0:
-        n = get_digit_as_char(N % b) + n
-        N /= b
-    return n
-
-#################
 #-#  SPECIAL  #-#
 #################
 
