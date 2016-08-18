@@ -4,55 +4,53 @@ from math import sqrt, floor
 import copy
 from prime import is_prime, next_prime
 from fraction import Fraction
+from number import get_digit_list
 
-##################
-#-# PROPERTIES #-#
-##################
+##############
+# PROPERTIES #
+##############
 
+## returns True is number is dividable by 2
 def is_even(number):
     return number % 2 == 0
 
+## returns True if the natural number n is abundant
+# note n is abundant :<=> sum of proper dividors of n minus n is greater than n
 def is_abundant(number):
     return sum_of_all_proper_divisors_of(number) - number > number
 
+## returns True if the natural number n is deficient
+# note n is deficient :<=> sum of proper dividors of n minus n is less than n
 def is_deficient(number):
     return sum_of_all_proper_divisors_of(number) - number < number
 
-# n must be an positive integer
-def is_pandigital(n, include_zero = False):
-
-    if type(n) != int or n < 0:
-        return None
-
-    # checks if each digit from 1 (or 0) is used exactly once
-    #     0      1      2      3      4      5      6      7      8      9
-    Ds = [False, False, False, False, False, False, False, False, False, False]
-    ds = 0
-
-    while n != 0:
-
-        # get next digit
-        d = n % 10
-
-        # zero allowed?
-        if d == 0 and (not include_zero):
+## returns True if the natural number n is pandigital
+# n is pandigital :<=> digits of n are a permutation of 123456789[0]
+# has optional parameter include_zero
+def is_pandigital(n, include_zero = False, base=10):
+    # create digit list for n
+    n_digits = get_digit_list(n)
+    # optimized compare
+    if len(n_digits) != base - 1 + int(include_zero):
+        print "ne"
+        return False
+    d = 1 - int(include_zero)
+    while d < base:
+        # check if digit d appears once in n
+        appeared_once = False
+        for n_d in n_digits:
+            if n_d == d:
+                if appeared_once:
+                    print "o"
+                    # d appeares twice in n
+                    return False
+                appeared_once = True
+        if not appeared_once:
+            # d does not appear in n
+            print "t"
             return False
-
-        # digit already used?
-        if (Ds[d]):
-            # digit occurs twice
-            return False
-        else:
-            # register digit
-            Ds[d] = True
-            ds += 1
-
-        n /= 10
-
-    if include_zero:
-        return ds == 10
-    else:
-        return ds == 9
+        d += 1
+    return True
 
 # n must be an integer
 # a list is returned from witch the original value can be recreated by multiplying a variable initially set to 1 by each element of the list
