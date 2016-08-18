@@ -9,7 +9,7 @@
 
 from problem_000 import *
 from math import sqrt
-from ppe_math import get_continued_fraction_for_sqrt_of
+from continued_fraction import get_continued_fraction_for_sqrt_of
 
 class Problem_066(Problem):
 
@@ -55,7 +55,7 @@ Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of 
                     k += 1
                     #print(k)
 
-                    F = cf.getApproximation(k)
+                    F = cf.approximate(k)
                     x = F.numerator
                     y = F.denominator
                     #print(F)
