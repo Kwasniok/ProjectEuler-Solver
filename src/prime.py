@@ -123,6 +123,7 @@ def factorise(n):
     # n has no divisor and is therefore prime
     return [n]
 
+## returns a list of distinct prime factors of the natural number
 def distinct_prime_factors(n):
     if n == 1:
         return []
@@ -139,7 +140,7 @@ def distinct_prime_factors(n):
                 while n % i == 0:
                     n /= i
                 # calculate remaining distinct prime factors
-                ret =  distinct_prime_factors(n)
+                ret = distinct_prime_factors(n)
                 ret.append(i)
                 return ret
             if cpi == len(_cached_prime_range) - 1:
