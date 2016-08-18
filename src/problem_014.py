@@ -8,7 +8,6 @@
 #
 
 from problem_000 import *
-from scipy.fftpack.realtransforms import dst
 from sequences import collatz_depth, collatz_chain
 
 class Problem_014(Problem):
