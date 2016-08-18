@@ -8,7 +8,6 @@
 #
 
 from problem_000 import *
-from ppe_math import simplify_fraction_dec as simplify_fraction
 
 class Problem_065(Problem):
 
