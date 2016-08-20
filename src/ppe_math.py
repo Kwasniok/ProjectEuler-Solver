@@ -163,6 +163,28 @@ def list_of_proper_divisors(n):
     divs.sort()
     return divs
 
+## returns a list of divisors of the natural number n in ascending order
+# where each divisor d fullfills min ≤ d ≤ max
+# note: includes trivial divisor n and 1
+# see list_of_proper_divisors
+def list_of_divisors_in_range(n, min, max):
+    divs = []
+    i = 1
+    s = sqrt(n)
+    while i < s:
+        if n % i == 0:
+            if i >= min and i <= max:
+                divs.append(i)
+            if n / i >= min and n / i <= max:
+                divs.append(n / i)
+            if i > max:
+                break
+        i += 1
+    if n % s == 0 and s >= min and s <= max:
+        divs.append(int(s))
+    divs.sort()
+    return divs
+
 ## returns sum of divisors all of the natural number n in ascending order
 # note: excludes trivial divisor n, includes proper divisor 1
 # see list_of_proper_divisors
