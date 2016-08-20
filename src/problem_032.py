@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_permutation import *
+from ppe_permutation import Symmetric_Group
 
 class Problem_032(Problem):
 
@@ -30,28 +30,15 @@ HINT: Some products can be obtained in more than one way so be sure to only incl
         # sum of all distinct products
         res = 0
 
-        # total number of digits
-        #Ds = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        Ds = []
-        for i in range(1, N + 1):
-            Ds.append(i)
-        ds = len(Ds)
-
-
         # for every permutation
-        i = -1
-        nop = num_of_permutations(Ds)
-        while i < nop:
-            i += 1
-
-            pDs = get_permutation(i, Ds)
+        for pDs in Symmetric_Group(N):
 
             # digits for multiplicand
-            for dm1 in range(1, ds - 1): # -2 for min. digits for multiplier and product; +1 for upper range bound
+            for dm1 in range(1, N - 1): # -2 for min. digits for multiplier and product; +1 for upper range bound
                 # digits for multiplier
-                for dm2 in range(1, ds - dm1): # -1 for min. digits for product; +1 for upper range bound
+                for dm2 in range(1, N - dm1): # -1 for min. digits for product; +1 for upper range bound
                     # digits for product
-                    dp = ds - dm1 - dm2
+                    dp = N - dm1 - dm2
 
                     # digit counter
                     c = 0

@@ -13,7 +13,7 @@ from math import log10
 from prime import is_prime
 from number import get_digit_list, number_from_digit_list
 from sys import maxint
-from ppe_permutation import all_rotations
+from ppe_permutation import Cyclic_Rotation_Group
 
 
 class Problem_035(Problem):
@@ -76,9 +76,10 @@ How many circular primes are there below ''' + dye_input_var("one million") + "?
 
                 Ds = get_digit_list(n)
                 add = True
-                for r in all_rotations(Ds):
+                #for r in all_rotations(Ds):
+                for rot in Cyclic_Rotation_Group(len(Ds)):
                     # current rotation
-                    rn = number_from_digit_list(r)
+                    rn = number_from_digit_list(rot(Ds))
 
                     # save time by looking-up known circular primes
                     for rp in rot_primes:

@@ -9,7 +9,7 @@
 
 from problem_000 import *
 from prime import is_prime
-from ppe_permutation import all_permutations
+from ppe_permutation import Symmetric_Group
 
 class Problem_049(Problem):
 
@@ -36,7 +36,7 @@ What 12-digit number do you form by concatenating the three terms in this sequen
 
             ni = n
             nStr = str(n)
-            nps = all_permutations(nStr)
+            nps = Symmetric_Group.get_all_of_list(nStr)
             i = 0
             while i < 3:
 

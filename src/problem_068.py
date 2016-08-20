@@ -8,7 +8,7 @@
 #
 
 from problem_000 import *
-from ppe_permutation import all_permutations
+from ppe_permutation import Symmetric_Group
 from math import log10
 
 class Problem_068(Problem):
@@ -75,7 +75,8 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
                         ins.remove(oon)
 
                     # for each combination of outer numbers; high to low
-                    for poons in all_permutations(oons):
+                    for perm in Symmetric_Group(len(oons)):
+                        poons = perm(oons)
 
                         # outer numbers
                         # O[n] := n-th outer number; clockwise
@@ -85,7 +86,9 @@ Using the numbers 1 to 10, and depending on arrangements, it is possible to form
 
                         # inner numbers
                         # I[n] := n-th inner number; clockwise
-                        for I in all_permutations(ins):
+                        #for I in all_permutations(ins):
+                        for p in Symmetric_Group(len(ins)):
+                            I = p (ins)
 
                             # (O[n], I[n], I[(n+1) mod G]) is the n-th chain
 
