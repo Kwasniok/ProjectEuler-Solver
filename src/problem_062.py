@@ -9,7 +9,6 @@
 
 from problem_000 import *
 from ppe_permutation import is_permutation_of
-from util import stringToCharList, charListToString
 
 class Problem_062(Problem):
 
@@ -17,7 +16,7 @@ class Problem_062(Problem):
         self.problem_nr = 62
         self.input_format = (InputType.NUMBER_INT, 1, 5)
         self.default_input = 5
-        self.description_str = '''The cube, 41063625 (3453), can be permuted to produce two other cubes: 56623104 (3843) and 66430125 (4053). In fact, 41063625 is the smallest cube which has exactly three permutations of its digits which are also cube.
+        self.description_str = '''The cube, 41063625 (345^3), can be permuted to produce two other cubes: 56623104 (384^3) and 66430125 (405^3). In fact, 41063625 is the smallest cube which has exactly three permutations of its digits which are also cube.
 
 Find the smallest cube for which exactly ''' + dye_input_var("five") + ''' permutations of its digits are cube.
 '''
@@ -35,20 +34,20 @@ Find the smallest cube for which exactly ''' + dye_input_var("five") + ''' permu
             ci = n ** 3
             #print(ci)
 
-            ciList = stringToCharList(str(ci))
+            ci_str = str(ci)
 
             ps = 1
             for c in cs:
-                if is_permutation_of(ciList, c):
+                if is_permutation_of(ci_str, c):
                     ps += 1
 
-            cs.append(ciList)
+            cs.append(ci_str)
 
             if ps == N:
                 PS = []
                 for c in cs:
-                    if is_permutation_of(ciList, c):
-                        ci = int(charListToString(c))
+                    if is_permutation_of(ci_str, c):
+                        ci = int(c)
                         PS.append(ci)
                 cont = False
 
