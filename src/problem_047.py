@@ -10,7 +10,6 @@
 from problem_000 import *
 from prime import next_prime, factorise
 from util import list_to_fancy_str
-from choose import num_of_choose_variations, choose
 
 class Problem_047(Problem):
 
@@ -41,65 +40,6 @@ Find the first ''' + dye_input_var("four") + " consecutive integers to have " + 
 
         res = None
 
-        # (tests all numbers) --> n > 50000
-
-        '''
-        # I.a
-        # checks all numbers (once)
-        n = 2
-        while True:
-            if n % 1000 == 0:
-                print(n)
-            i = 0
-            while i < Nci:
-                ni = n + i
-                pfs = set(factorise(ni)) # prime factor set
-                if len(pfs) != Npf:
-                    break
-                i += 1
-
-            if i == Nci:
-                break
-
-            n += i + 1
-
-        res = n
-        '''
-
-        '''
-        # I.b
-        # checks all numbers (once)
-        ps = [2] # primes
-        n = 2
-        while True:
-            #if n % 1000 == 0:
-            #    print(n)
-            i = 0
-            while i < Nci:
-                ni = n + i
-
-                while ni > ps[len(ps) - 1]:
-                    ps.append(next_prime(ps[len(ps) - 1]))
-
-                ndpf = 0
-                for p in ps:
-                    if ni % p == 0:
-                        ndpf += 1
-                    if ndpf > Npf:
-                        break
-
-                if ndpf != Npf:
-                    break
-
-                i += 1
-
-            if i == Nci:
-                break
-
-            n += i + 1
-        res = n
-        '''
-
         ps = [2] # primes (for optimization only)
         def hnodpfs(n, Npf): # has number of distinct prime factors
 
@@ -118,8 +58,6 @@ Find the first ''' + dye_input_var("four") + " consecutive integers to have " + 
             else:
                 return False
 
-
-        # II.b
         # checks each Nci-th number
         # and surrounding numbers if match occurred
         n = 2
@@ -152,68 +90,6 @@ Find the first ''' + dye_input_var("four") + " consecutive integers to have " + 
                     ni += 1
 
             n += Nci
-
-        '''
-        # III.
-        # -/- (unfinished)
-        ### TODO: REPLACE FACTROISE WITH METHOD OF I.b!!!
-        res = None
-
-        ps = [2] # list of prime numbers
-        # fill list with first Npf prime numbers
-        while len(ps) < Npf:
-            ps.append(next_prime(ps[len(ps) - 1]))
-
-        # calculate lowest number with Npf distinct prime factors
-        #lowest = 1
-        #for p in ps:
-        #    lowest *= p
-
-        ### TODO: HAS TO CHECK OTHER EXPONENTS THAN 1!
-        pfes = [] # list of exponents for chosen distinct prime factors
-        # fill pfes with Npf 1s
-        while len(pfes) < Npf:
-            pfes.append(1)
-
-        cont = True
-        while cont:
-
-            # choose Npf distinct prime factors out of ps
-            l = 0
-            ncv = num_of_choose_variations(Npf, ps)
-            while l != ncv:
-
-                pfs = choose(l + 1, Npf, ps)  # list of chosen distinct prime factors
-
-                # construct number from pfs and pfes
-                n = 1
-                k = 0
-                while k < Npf:
-                    n *= pfs[k] ** pfes[k]
-                    k += 1
-
-                # check following sequence
-                j = 1
-                hit = True
-                while j < Nci:
-                    nj = n + j
-                    if len(set(factorise(nj))) != Npf:
-                        hit = False
-                        break
-                    j += 1
-
-                if hit:
-                    res = n
-                    cont = False
-                    break
-
-                # next
-                l += 1
-
-            # extend ps
-            ps.append(next_prime(ps[len(ps) - 1]))
-        '''
-
 
         self.last_result = res
 
