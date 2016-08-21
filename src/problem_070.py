@@ -76,92 +76,10 @@ Find the value of n, 1 < n < ''' + dye_input_var("10^7") + ''', for which φ(n) 
                     min_ds = ps
                     #print("HIT: " + str(n) + ", " + str(ps) + ", " + str(t) + ", " + str(f))
 
-        print(min_r)
+        #print(min_r)
 
         self.last_result = min_n
         self.last_result_details = min_ds
-
-        ''' for complete search (takes too much time!)
-        # stores the current minimum
-        min_r = float("inf")
-        min_n = None
-
-        # create list of all primes used
-        PS = [2]
-        supp = N / 2
-        while True:
-            np = next_prime(PS[len(PS) - 1])
-            if np > supp:
-                break
-            PS.append(np)
-        PS.sort(reverse=True)
-
-
-        # check all possible combinations of subsets of two or more primes
-        # try combinations with less prime factors and highest prime factors first
-        num_of_ps = 2
-        while num_of_ps <= len(PS):
-
-            # remove primes from list which are too large
-            while num_of_ps < len(PS):
-                max_possible = 1.0
-                for i in range(num_of_ps):
-                    max_possible *= PS[i]
-                if max_possible > N:
-                    PS.remove(PS[0])
-                    continue
-                else:
-                    break
-
-            print(num_of_ps)
-            print(PS)
-
-            if num_of_ps > len(PS):
-                break
-
-            #ps_i_chosen = range(num_of_ps) # no overlap
-            ps_i_chosen = []
-            for i in range(num_of_ps):
-                ps_i_chosen.append(0)
-            #ps_i_chosen.append(len(PS)) # no overlap
-            while True: # != len(PS) - num_of_ps: for no overlap
-
-                # choose the primes for the current number
-                ps = []
-                for i in range(num_of_ps):
-                    ps.append(PS[ps_i_chosen[i]])
-
-                # create a number from distinct primes
-                n = 1
-                for p in ps:
-                    n *= p
-
-                # calculate totient and ratio
-                t = totient_from_distinct_prime_factors(n, ps)
-                f = float(n) / float(t)
-
-                # check for minimum
-                if n < N and f < min_r and is_permutation_of_number(t, n):
-                    min_r = f
-                    min_n = n
-                    print("HIT: " + str(n) + ", " + str(ps) + ", " + str(t) + ", " + str(f))
-
-                if (ps_i_chosen[0] == len(PS)-1): # remove for no overlap
-                    break
-
-                # increment indices
-                for i in range(num_of_ps-1, -1, -1):
-                    if ps_i_chosen[i] + 1 != len(PS): # != ps_i_chosen[i+1] for no overlap
-                        pos = ps_i_chosen[i] + 1 # (no +1 for no overlap
-                        for j in range(i, num_of_ps):
-                            #pos += 1 # no overlap
-                            ps_i_chosen[j] = pos
-                        break
-
-            num_of_ps += 1
-
-        print(min_r)
-        '''
 
     def details(self):
         n = self.last_result
