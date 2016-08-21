@@ -106,7 +106,7 @@ def factorise(n):
         while i <= lim:
             if n % i == 0:
                 # calculate remaining distinct prime factors
-                ret =  distinct_prime_factors(n / i)
+                ret = factorise(n / i)
                 ret.append(i)
                 return ret
             if cpi == len(_cached_prime_range) - 1:
@@ -116,7 +116,7 @@ def factorise(n):
         # part 2 (beyond cahce)
         while i <= lim:
             if n % i == 0:
-                ret =  distinct_prime_factors(n / i)
+                ret = factorise(n / i)
                 ret.append(i)
                 return ret
             i += 2
