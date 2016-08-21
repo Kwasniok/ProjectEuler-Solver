@@ -7,189 +7,108 @@
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
-
 from ppe_math import binomial_coefficient as nCr
 
-# M := number of choose elements
-# E := list
-def num_of_choose_variations(M, E):
-    
-    if type(M) != int or type(E) != list:
+## returns i-th variation to choose m (nautral number) elements from sequence seq (list or string)
+#  where i = 1 is the frist and i = nCr(len(seq), m) is the last variation
+# @param i must be a an integer in range 1 ≤ i ≤ nCr(len(seq), m)
+# @param reverse begin with last variation (optional, default is False)
+# note: This algorithm assumes that all elements in seq are distinct.
+# note: The order of elements is preserved.
+# note: The order of variations is determined by the following scheme:
+#       The highest index is kept as low as possible as well as the second highest index etc..
+#       e.g.:     i \ seq: A B C D
+#       (m = 2)   1        X X
+#                 2        X   X
+#                 3          X X
+#                 4        X     X
+#                 5          X   X
+#                 6            X X
+#       (where X marks a chosen index)
+#       When reversed the lowest index is NOT always set as high as possible etc.!
+def choose(i, m, seq, reverse=False):
+    n = len(seq)
+    # check parameters
+    if m < 1 or m > n or i < 1 or i > nCr(n, m):
         return None
-    
-    N = len(E)
-    
-    if M > N:
-        return None
-    
-    return nCr(N, M)
-
-# choose ith variation of M elements out of list E
-def choose(i, M, E):
-    
-    # assertions #1
-    if type(i) != int or type(M) != int or (type(E) != list and type(E) != str):
-        return None
-    
-    N = len(E)
-    
-    # assertions #2
-    if i < 1 or M < 1 or M > N:
-        return None
-    
-    i -= 1
-    i = i % nCr(N, M)
-    i += 1
-    
-    # list of chosen elements
-    e = []
-    
-    # internal version for recursion
-    def _choose(i, M, E, N, e):
-        
-        if M == 0:
-            return
-        
-        # find index for first element to choose
-        k = N
-        for n in range(N, M - 1, -1):
-            
-            l = nCr(n, M)
-            if i <= l:
-                k = n
-            else:
-                break
-        
-        # append new chosen element as head
-        e[0:0] = [E[k - 1]]
-        
-        # recalculate values for remaining elements to choose
-        if k > M:
-            i -= nCr(k - 1, M)
-        M -= 1
-        N = k - 1
-        
-        # recursive recall for remaining elements to be chosen
-        _choose(i, M, E, N, e)
-        return
-            
-    _choose(i, M, E, N, e)
-    
-    return e
-
-# choose ith variation of M elements out of list of length N
-def choose_indexes_only(i, M, N):
-    
-    # assertions #1
-    if type(i) != int or type(M) != int or type(N) != int:
-        return None
-    
-    # assertions #2
-    if i < 1 or M < 1 or M > N:
-        return None
-    
-    i -= 1
-    i = i % nCr(N, M)
-    i += 1
-    
-    # list of chosen indexes
-    e = []
-    
-    # internal version for recursion
-    def _choose_indexes_only(i, M, N, e):
-        
-        if M == 0:
-            return
-        
-        # find index for first element to choose
-        k = N
-        for n in range(N, M - 1, -1):
-            
-            l = nCr(n, M)
-            if i <= l:
-                k = n
-            else:
-                break
-        
-        # append new chosen element as head
-        e[0:0] = [k - 1]
-        
-        # recalculate values for remaining elements to choose
-        if k > M:
-            i -= nCr(k - 1, M)
-        M -= 1
-        N = k - 1
-        
-        # recursive recall for remaining elements to be chosen
-        _choose_indexes_only(i, M, N, e)
-        return
-            
-    _choose_indexes_only(i, M, N, e)
-    
-    return e
-
-# choose ith variation of M elements out of list of length N in reversed order
-def choose_reverse_indexes_only(i, M, N):
-    
-    # assertions #1
-    if type(i) != int or type(M) != int or type(N) != int:
-        return None
-    
-    # assertions #2
-    if i < 1 or M < 1 or M > N:
-        return None
-    
-    i -= 1
-    i = i % nCr(N, M)
-    i += 1
-    
-    # list of chosen indexes
-    e = []
-    
-    # internal version for recursion
-    def _choose_reverse_indexes_only(i, m, n, N, e):
-        
-        if m == 0:
-            return
-        
+    # check if order is reversed
+    if reverse:
+        i = nCr(n, m) + 1 - i
+    # internal recursive function
+    def _choose(i, m, seq, n):
+        # stop condition (no more elements to choose)
+        if m  == 0:
+            if type(seq) == list:
+                return []
+            if type(seq) == str:
+                return ""
         # find index for first element to choose
         k = n
-        for n in range(n, m - 1, -1):
-            
-            l = nCr(n, m)
+        for q in range(n, m - 1, -1):
+            l = nCr(q, m)
             if i <= l:
-                k = n
+                k = q
             else:
                 break
-        
-        # append new chosen element as head
-        e.append(N - k)
-        
-        # recalculate values for remaining elements to choose
+        # get new chosen element
+        if type(seq) == list:
+            ret = [seq[k - 1]]
+        if type(seq) == str:
+            ret = seq[k-1]
+        # calculate values for remaining elements to choose
         if k > m:
             i -= nCr(k - 1, m)
         m -= 1
         n = k - 1
-        
-        # recursive recall for remaining elements to be chosen
-        _choose_reverse_indexes_only(i, m, n, N, e)
-        return
-            
-    _choose_reverse_indexes_only(i, M, N, N, e)
-    
-    return e
+        # recursive call for remaining elements to be chosen
+        return _choose(i, m, seq, n) + ret
+    # return result
+    return _choose(i, m, seq, n)
 
-'''
-E = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-for l in range(1, len(E) + 1):
-    for i in range(1, num_of_choose_variations(l, E) + 1):
-        #print("%d : %d" % (l, i))
-        print(choose(i, l, E))
-'''
-
-'''
-N = 3
-M = 2
-for i in range (0, nCr(N, M)):
-    print (choose_reverse_indexes_only(i + 1, M, N))
-'''
+## returns i-th variation to choose m (nautral number) elements from range(n)
+#  where i = 1 is the frist and i = nCr(len(seq), m) is the last variation
+# @param i must be a an integer in range 1 ≤ i ≤ nCr(len(seq), m)
+# @param reverse begin with last variation (optional, default is False)
+# note: This algorithm assumes that all elements in seq are distinct.
+# note: The order of elements is preserved.
+# note: The order of variations is determined by the following scheme:
+#       The highest index is kept as low as possible as well as the second highest index etc..
+#       e.g.:     i \ seq: 0 1 2 3
+#       (m = 2)   1        X X
+#       (n = 4)   2        X   X
+#                 3          X X
+#                 4        X     X
+#                 5          X   X
+#                 6            X X
+#       (where X marks a chosen index)
+#       When reversed the lowest index is NOT always set as high as possible etc.!
+def choose_from_range(i, m, n, reverse=False):
+    # check parameters
+    if m < 1 or m > n or i < 1 or i > nCr(n, m):
+        return None
+    # check if order is reversed
+    if reverse:
+        i = nCr(n, m) + 1 - i
+    # internal recursive function
+    def _choose(i, m, n):
+        # stop condition (no more elements to choose)
+        if m  == 0:
+            return []
+        # find index for first element to choose
+        k = n
+        for q in range(n, m - 1, -1):
+            l = nCr(q, m)
+            if i <= l:
+                k = q
+            else:
+                break
+            ret = [k - 1]
+        # calculate values for remaining elements to choose
+        if k > m:
+            i -= nCr(k - 1, m)
+        m -= 1
+        n = k - 1
+        # recursive call for remaining elements to be chosen
+        return _choose(i, m, n) + ret
+    # return result
+    return _choose(i, m, n)

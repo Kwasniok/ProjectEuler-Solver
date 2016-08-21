@@ -10,7 +10,7 @@
 from problem_000 import *
 from prime import is_prime, next_prime
 from ppe_math import binomial_coefficient as nCr
-from choose import choose_indexes_only, choose_reverse_indexes_only
+from choose import choose_from_range
 
 class Problem_051(Problem):
 
@@ -43,14 +43,14 @@ Find the smallest prime which, by replacing part of the number (not necessarily 
                 nncds_max = 10 ** ncds
                 while nncds < nncds_max:
 
-                    i = 0
+                    i = 1
                     nocv = nCr(ds, cds) # number of choose variations
                     while i <= nocv:
 
                         ps = 0
                         PS = []
 
-                        nis = choose_reverse_indexes_only(i + 1, cds, ds)
+                        nis = choose_from_range(i, cds, ds, reverse=True)
 
 						#print(" >> " + str(nncds))
 
