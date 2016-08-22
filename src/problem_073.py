@@ -3,7 +3,7 @@
 #   problem_073.py
 #   ProjectEuler
 #
-#   This file was created by Jens Kwasniok on XX.XX.16.
+#   This file was created by Jens Kwasniok on 19.08.16.
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
