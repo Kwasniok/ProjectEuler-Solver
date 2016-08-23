@@ -62,7 +62,19 @@ class Date():
     def __ge__(self, other):
         return not self < other
 
-    def weekdayIntToStr(self, wdi):
+    # string related methods
+
+    def __str__(self):
+        # self.update() is implicit
+        return str(self.get_date()) +  "," + str(self.get_weekday())
+
+    def __repr__(self):
+        return str(self.get_date()) +  "," + str(self.get_weekday())
+
+    def __unicode__(self):
+        return unicode(self.get_date()) +  "," + unicode(self.get_weekday())
+
+    def weekday_to_str(self, wdi):
         if wdi == 2:
             return "Monday"
         if wdi == 3:
@@ -150,12 +162,7 @@ class Date():
 
     def get_weekday(self):
         self.update()
-        return self.weekdayIntToStr(self.calculate_weekday())
-
-    def print_date(self):
-        # self.update() is implicit
-        print(self.get_date(), ",", self.get_weekday())
-        return self
+        return self.weekday_to_str(self.calculate_weekday())
 
     def update(self):
         self.add_days(0)
