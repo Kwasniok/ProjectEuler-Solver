@@ -8,7 +8,6 @@
 #
 
 from sys import stdout
-from time import time
 from input_format import *
 from util import list_to_fancy_str
 
@@ -55,13 +54,21 @@ class Problem:
         pass
 
     def post_calculate(self):
-        stdout.write("%s\n" % dye_result_var(self.last_result))
+        pass
 
     ## calles the solving algorithm for this problem (use this method for external handling)
     def execute(self, input=None):
         self.pre_calculate(input)
         self.calculate(input)
         self.post_calculate()
+
+    def get_last_input_as_string(self):
+        if self.supports_input():
+            return dye_input_var(self.last_input)
+        return dye_input_var("default")
+
+    def get_last_result_as_string(self):
+        return dye_result_var(self.last_result)
 
     ## returns either a description or a 'not available' message
     def description(self):
