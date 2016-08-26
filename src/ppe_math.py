@@ -56,7 +56,7 @@ def is_pandigital(n, include_zero = False, base=10):
         d += 1
     return True
 
-## returns wheather the natural number in i a palindrome (in given base)
+## returns whether the natural number in i a palindrome (in given base)
 # n is palindrome in base b :<=> digits of n are symmetric in base b
 # (first digit equals last, second digit equals second to last, etc.)
 def is_palindrome(n, base=10):

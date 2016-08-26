@@ -1,5 +1,5 @@
 
-## INFO: THIS CODE MIGHT CONTAINS SOME BUGGS!
+## INFO: THIS CODE MIGHT CONTAIN SOME BUGGS!
 
 ## important functions: poker_card_hand_stack_from_string, comparePokerCardHands
 
