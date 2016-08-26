@@ -35,8 +35,7 @@ By finding minimal solutions in x for D = {2, 3, 5, 6, 7}, we obtain the followi
 
 Hence, by considering minimal solutions in x for D ≤ 7, the largest x is obtained when D=5.
 
-Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of x for which the largest value of x is obtained.
-'''
+Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of x for which the largest value of x is obtained.'''
 
     def calculate(self, N):
 
@@ -68,7 +67,7 @@ Find the value of D ≤ ''' + dye_input_var(1000) + ''' in minimal solutions of 
                         break
 
             D -= 1
-            
+
         self.last_result = D_min_max
         self.last_result_details = F_min_max
 
