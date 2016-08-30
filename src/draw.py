@@ -271,7 +271,7 @@ class Screen_Text():
 
     first_possible_line = None
     last_possible_line = None
-    ## @biref text to be displayed in section between Header and Footer.
+    ## @brief text to be displayed in section between Header and Footer.
     # @note When set to None no text will be displayed.
     text = None
 
