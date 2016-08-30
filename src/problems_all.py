@@ -88,3 +88,4 @@ from problem_075 import *
 from problem_076 import *
 from problem_077 import *
 from problem_078 import *
+from problem_079 import *
