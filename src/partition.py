@@ -17,8 +17,11 @@ _part_p_cache = [1, 1, 2, 3]
 ## @brief returns number of possible partitions of the natural number n (including 0)
 # @note The algorithm is described here: http://mathworld.wolfram.com/PartitionFunctionP.html
 def partition_P(n):
+    if n < 0:
+        return 0
     if n < len(_part_p_cache):
         return _part_p_cache[n]
+    ''' # solwer version due to calculation of divisors
     s = 0
     k = 0
     while k < n:
@@ -27,6 +30,15 @@ def partition_P(n):
     if n == len(_part_p_cache):
         _part_p_cache.append(s/n)
     return s / n
+    '''
+    s = 0
+    k = 1
+    while k <= n:
+        s += (-1)**(k+1) * (partition_P(n - ((3*k - 1) * k) / 2) + partition_P(n - ((3*k + 1) * k) / 2))
+        k += 1
+    if n == len(_part_p_cache):
+        _part_p_cache.append(s)
+    return s
 
 # cache for partition_P, where cache[n] = P(n)
 _part_prime_cache = [1, 0]
