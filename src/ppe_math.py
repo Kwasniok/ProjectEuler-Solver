@@ -123,7 +123,7 @@ def number_of_divisors(n):
     divs = 0
     i = 1
     while i <= sqrt(n):
-        if number % i == 0:
+        if n % i == 0:
             divs += 1
         i += 1
     divs *= 2
