@@ -3,7 +3,7 @@
 #   problem_079.py
 #   ProjectEuler
 #
-#   This file was created by Jens Kwasniok on XX.XX.16.
+#   This file was created by Jens Kwasniok on 30.08.16.
 #   Copyright (c) 2016 Jens Kwasniok. All rights reserved.
 #
 
@@ -32,7 +32,13 @@ Given that the three characters are always asked for in order, analyse the file 
                 self.nodes = []
                 self.edges = set()
                 return None
-            ## returns all indices of nodes wich have no predecessor as list
+            ## appends a node with value val to graph
+            def append_node(self, val):
+                self.nodes.append(val)
+            ## returns index of node with value val
+            def get_node_index(self, val):
+                return self.nodes.index(val)
+            ## returns all indices of nodes which have no predecessor as list
             def get_head_node_indices(self):
                 ret = []
                 for i in range(len(self.nodes)):
