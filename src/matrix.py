@@ -8,6 +8,7 @@
 #
 
 from type_number import is_number
+from colours import dye_highlight
 
 ## @brief A class representing a Vector of dimension $n$.
 # `vec` $ \\equiv
@@ -290,6 +291,7 @@ class Matrix():
         return "Mat(" + str(self.m) + "," + str(self.n) + "):" + str(self.vs)
 
     ## @brief returns Matrix as aligned grid surrounded by brackets using unicode characters and multiple lines (via vertical tabs)
+    # @param highlight list of inices to highlight
     # @code
     # >>> m = Matrix([[123, 456, 789],[12, 34, 56],[1, 2, 3]])
     # >>> print "-some space_" + unicode(m)
@@ -298,7 +300,7 @@ class Matrix():
     #             ⎣  1   2   3⎦
     # @endcode
     # @note Prefer this method over str() when printing to console since the output is much more readable.
-    def fancy_ustr(self):
+    def fancy_ustr(self, highlight=[]):
         ret = u""
         # convert all elements to unicode strings
         vs_ustr = []
@@ -333,7 +335,11 @@ class Matrix():
             while j < self.n:
                 # calculate padding
                 padding = (elem_space_per_col[j] - len(vs_ustr[i][j]))
-                ret += u" " * padding + vs_ustr[i][j]
+                ret += u" " * padding
+                if (i,j) in highlight:
+                    ret += dye_highlight(vs_ustr[i][j])
+                else:
+                    ret += vs_ustr[i][j]
                 if j < self.n - 1:
                     ret += u" "
                 j += 1
