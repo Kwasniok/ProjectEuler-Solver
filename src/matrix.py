@@ -8,7 +8,7 @@
 #
 
 from type_number import is_number
-from colours import dye_highlight
+from colours import udye_highlight
 
 ## @brief A class representing a Vector of dimension $n$.
 # `vec` $ \\equiv
@@ -337,7 +337,7 @@ class Matrix():
                 padding = (elem_space_per_col[j] - len(vs_ustr[i][j]))
                 ret += u" " * padding
                 if (i,j) in highlight:
-                    ret += dye_highlight(vs_ustr[i][j])
+                    ret += udye_highlight(vs_ustr[i][j])
                 else:
                     ret += vs_ustr[i][j]
                 if j < self.n - 1:

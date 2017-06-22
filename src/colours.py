@@ -44,6 +44,30 @@ class Colours:
         print(Colours.RED_LIGHT + "R" + Colours.GREEN_LIGHT + "G" + Colours.BLUE_LIGHT + "B " +
         Colours.CYAN_LIGHT + "C" +  Colours.MAGENTA_LIGHT + "M" + Colours.YELLOW_LIGHT + "Y " + Colours.END)
 
+## converts object to unicode string and adds sourrunding colour tags
+def udye_input_var(us):
+    return Colours.INPUTVAR + unicode(us) + Colours.END
+
+## converts object to unicode string and adds sourrunding colour tags
+def udye_result_var(us):
+    return Colours.RESULTVAR + unicode(us) + Colours.END
+
+## converts object to unicode string and adds sourrunding colour tags
+def udye_warning(us):
+    return Colours.WARNING + unicode(us) + Colours.END
+
+## converts object to unicode string and adds sourrunding colour tags
+def udye_highlight(us):
+    return Colours.HIGHLIGHT + unicode(us) + Colours.END
+
+## converts object to unicode string and adds sourrunding colour tags
+def udye_limit(us):
+    return Colours.LIMIT + unicode(us) + Colours.END
+
+## converts object to unicode string and adds sourrunding colour tags
+def udye_input_type(us):
+    return Colours.INPUTTYPE + unicode(us) + Colours.END
+
 ## converts object to string and adds sourrunding colour tags
 def dye_input_var(s):
     return Colours.INPUTVAR + str(s) + Colours.END
