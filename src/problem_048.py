@@ -47,7 +47,7 @@ Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + ''' + dye_input_
 
         sum_str = str(sum)
 
-        return list_to_fancy_str(sum_str, highlightColour = Colours.RESULTVAR,
-                              startHighlight = len(sum_str) - ds, endHighlight = len(sum_str))
+        return list_to_fancy_str(sum_str, highlight_colour = Colours.RESULTVAR,
+                              highlight_start = len(sum_str) - ds, highlight_end = len(sum_str))
 
 register_problem(Problem_048())

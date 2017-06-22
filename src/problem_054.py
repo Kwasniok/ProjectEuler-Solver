@@ -83,7 +83,7 @@ How many hands does Player 1 win?
         winner_is = self.last_result_details
         g = 1
         for game in games:
-            desc_str += str(g) + " : " + list_to_fancy_str(game, " vs. ", highlightColour = Colours.HIGHLIGHT, startHighlight = winner_is[g - 1], endHighlight = winner_is[g - 1]) + "\n"
+            desc_str += str(g) + " : " + list_to_fancy_str(game, " vs. ", highlight_colour = Colours.HIGHLIGHT, highlight_start = winner_is[g - 1], highlight_end = winner_is[g - 1]) + "\n"
             g += 1
         return desc_str
 

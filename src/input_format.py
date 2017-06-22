@@ -75,7 +75,7 @@ def valueFromString(ipf, s):
                 return (True, v)
 
         eStr = "element " + dye_warning("not in list") + ":\n"
-        eStr += list_to_fancy_str(ipf[1], ', ', highlightColour = Colours.INPUTVAR, startHighlight = 0, endHighlight = len(ipf[1]))
+        eStr += list_to_fancy_str(ipf[1], ', ', highlight_colour = Colours.INPUTVAR, highlight_start = 0, highlight_end = len(ipf[1]))
         return (False, eStr)
 
     elif ipf[0] == InputType.TUPLE_HETEROGENE:
@@ -165,7 +165,7 @@ def usage_text_for_input_format(ipf): #TODO: COMPLETE!
 
     elif ipf[0] == InputType.CHOOSE_FROM_LIST:
         uStr = "type in one of these values:\n"
-        uStr += list_to_fancy_str(ipf[1], ', ', highlightColour = Colours.INPUTVAR, startHighlight = 0, endHighlight = len(ipf[1]))
+        uStr += list_to_fancy_str(ipf[1], ', ', highlight_colour = Colours.INPUTVAR, highlight_start = 0, highlight_end = len(ipf[1]))
 
         return uStr
 
