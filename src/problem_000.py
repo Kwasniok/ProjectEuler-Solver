@@ -25,7 +25,6 @@ class Problem:
     description_str = None
     input_format = None # e.g. (InputType.NUMBER_INT, 0, 1) see input_format.py
     default_input = None
-    supports_details = False
 
     # internal:
     last_input = None # is set automatically
