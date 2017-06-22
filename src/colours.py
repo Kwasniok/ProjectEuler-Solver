@@ -41,8 +41,8 @@ class Colours:
     END = BLACK
 
     def test(self):
-        print(Colours.RED + "R" + Colours.GREEN + "G" + Colours.BLUE + "B " +
-        Colours.CYAN + "C" +  Colours.MAGENTA + "M" + Colours.YELLOW + "Y " + Colours.END)
+        print(Colours.RED_LIGHT + "R" + Colours.GREEN_LIGHT + "G" + Colours.BLUE_LIGHT + "B " +
+        Colours.CYAN_LIGHT + "C" +  Colours.MAGENTA_LIGHT + "M" + Colours.YELLOW_LIGHT + "Y " + Colours.END)
 
 ## converts object to string and adds sourrunding colour tags
 def dye_input_var(s):
