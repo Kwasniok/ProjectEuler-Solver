@@ -19,7 +19,7 @@ class Colours:
 
     RED_DARK   =  '\033[31m'
     GREEN_DARK =  '\033[32m'
-    BLUE_DARK  =  '\033[44m'
+    BLUE_DARK  =  '\033[34m'
 
     CYAN_DARK    = '\033[36m'
     MAGENTA_DARK = '\033[35m'
