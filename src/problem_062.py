@@ -21,8 +21,8 @@ class Problem_062(Problem):
 Find the smallest cube for which exactly ''' + dye_input_var("five") + ''' permutations of its digits are cube.
 '''
 
-	def should_warn_long_execution_time(self):
-		return True
+    def should_warn_long_execution_time(self):
+        return True
 
     def calculate(self, N):
 

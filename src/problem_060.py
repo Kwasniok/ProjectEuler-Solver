@@ -23,8 +23,8 @@ class Problem_060(Problem):
 Find the lowest sum for a set of five numbers for which any two numbers concatenate to produce another prime.
 '''
 
-	def should_warn_long_execution_time(self):
-		return True
+    def should_warn_long_execution_time(self):
+        return True
 
     def calculate(self, N):
 
