@@ -46,27 +46,27 @@ class Colours:
 
 ## converts object to unicode string and adds sourrunding colour tags
 def udye_input_var(us):
-    return Colours.INPUTVAR + unicode(us) + Colours.END
+    return Colours.INPUTVAR + str(us) + Colours.END
 
 ## converts object to unicode string and adds sourrunding colour tags
 def udye_result_var(us):
-    return Colours.RESULTVAR + unicode(us) + Colours.END
+    return Colours.RESULTVAR + str(us) + Colours.END
 
 ## converts object to unicode string and adds sourrunding colour tags
 def udye_warning(us):
-    return Colours.WARNING + unicode(us) + Colours.END
+    return Colours.WARNING + str(us) + Colours.END
 
 ## converts object to unicode string and adds sourrunding colour tags
 def udye_highlight(us):
-    return Colours.HIGHLIGHT + unicode(us) + Colours.END
+    return Colours.HIGHLIGHT + str(us) + Colours.END
 
 ## converts object to unicode string and adds sourrunding colour tags
 def udye_limit(us):
-    return Colours.LIMIT + unicode(us) + Colours.END
+    return Colours.LIMIT + str(us) + Colours.END
 
 ## converts object to unicode string and adds sourrunding colour tags
 def udye_input_type(us):
-    return Colours.INPUTTYPE + unicode(us) + Colours.END
+    return Colours.INPUTTYPE + str(us) + Colours.END
 
 ## converts object to string and adds sourrunding colour tags
 def dye_input_var(s):

@@ -190,4 +190,4 @@ class Sorted_Set():
         return repr(self)
 
     def __unicode__(self):
-        return unicode(self.elements)
+        return str(self.elements)

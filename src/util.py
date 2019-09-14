@@ -66,7 +66,7 @@ def list_to_fancy_str(L, separator = None, normal_colour = None, highlight_colou
 
 
 ## returns the list as fancy string
-# note: list_to_fancy_str is an alternative to the standard unicode() for lists
+# note: list_to_fancy_str is an alternative to the standard str() for lists
 #       and is specially designed for list representations in text.
 # format: L[0] seperator L[1] seperator ... seperator L[last_index]
 # @param normal_colour colour of the non-highlighted elements [optional]
@@ -94,7 +94,7 @@ def list_to_fancy_ustr(L, separator = None, normal_colour = None, highlight_colo
         if highlight_colour and i == highlight_start:
             s += highlight_colour
         # append element
-        s += unicode(L[i])
+        s += str(L[i])
         # checks if current element is last element to be highlighted
         if highlight_colour and i == highlight_end:
             if normal_colour:

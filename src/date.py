@@ -72,7 +72,7 @@ class Date():
         return str(self.get_date()) +  "," + str(self.get_weekday())
 
     def __unicode__(self):
-        return unicode(self.get_date()) +  "," + unicode(self.get_weekday())
+        return str(self.get_date()) +  "," + str(self.get_weekday())
 
     def weekday_to_str(self, wdi):
         if wdi == 2:

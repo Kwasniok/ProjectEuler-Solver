@@ -82,7 +82,7 @@ class Vector():
     ## @brief returns Vector as aligned grid surrounded by brackets using unicode characters and multiple lines (via vertical tabs)
     # @code
     # >>> vec = Vector([123, 12, 1]])
-    # >>> print "-some space-" + unicode(vec)
+    # >>> print "-some space-" + str(vec)
     # -some space-⎡123⎤
     #             ⎢ 12⎥
     #             ⎣  1⎦
@@ -294,7 +294,7 @@ class Matrix():
     # @param highlight list of inices to highlight
     # @code
     # >>> m = Matrix([[123, 456, 789],[12, 34, 56],[1, 2, 3]])
-    # >>> print "-some space_" + unicode(m)
+    # >>> print "-some space_" + str(m)
     # -some space_⎡123 456 789⎤
     #             ⎢ 12  34  56⎥
     #             ⎣  1   2   3⎦
