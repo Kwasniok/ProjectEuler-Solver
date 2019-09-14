@@ -91,7 +91,7 @@ class Vector():
     def fancy_ustr(self):
         ret = ""
         # convert all elements to unicode strings
-        vs_ustr = map(lambda elem: unicode(elem), self.vs)
+        vs_ustr = [str(elem) for elem in self.vs]
         # calculate indentation
         elem_space = 0
         for i in range(self.dim()):
@@ -233,7 +233,7 @@ class Matrix():
     # @param first when integer m is set to first otherwise first is interpreted as list of list of elements.
     # @param second used when first is an integer and interpreted as n.
     #               (When unset n is set to m and the Matrix becomes square.)
-    def __init__(self, first=1, second=None):
+    def __init__(self, first=1, second=None, default_value=0):
         # shortcut for square matrices
         if type(first) == int and second == None:
             second = first
@@ -250,7 +250,7 @@ class Matrix():
                 self.vs.append([])
                 j = 0
                 while j < self.n:
-                    self.vs[i].append(0)
+                    self.vs[i].append(default_value)
                     j += 1
                 i += 1
         elif type(first) == list:
@@ -305,7 +305,7 @@ class Matrix():
         # convert all elements to unicode strings
         vs_ustr = []
         for row in self.vs:
-            vs_ustr.append(map(lambda elem: unicode(elem), row))
+            vs_ustr.append([str(elem) for elem in row])
         # calculate indentation
         elem_space_per_col = []
         b = 2 + self.n -1 # stores numbers of characters used in row (brackets, elements, padding & seperating spaces)
@@ -364,11 +364,11 @@ class Matrix():
 
     ## list related methods
 
-    def __getitem__(self, (i,j)):
-        return self.vs[i][j]
+    def __getitem__(self, I):
+        return self.vs[I[0]][I[1]]
 
-    def __setitem__(self, (i,j), val):
-        self.vs[i][j] = val
+    def __setitem__(self, I, val):
+        self.vs[I[0]][I[1]] = val
 
     # operators
 
