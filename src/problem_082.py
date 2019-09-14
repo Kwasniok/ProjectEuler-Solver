@@ -25,7 +25,7 @@ class Problem_082(Problem):
         self.default_input = 'large'
         self.description_str = 'The minimal path sum in the 5 by 5 matrix below, by starting in any cell in the left column and finishing in any cell in the right column, and only moving up, down, and right [...] the sum is equal to 994..\n'''
         self.description_str += "\n     " + self.test_matrix.fancy_ustr() + "\n"*self.test_matrix.dim()[0]
-        self.description_str += '''\nFind the minimal path sum, in matrix.txt (right click and "Save Link/Target As..."), a 31K text file containing a 80 by 80 matrix, from the left column to the right column.'''
+        self.description_str += '''\nFind the minimal path sum, in matrix.txt, a 31K text file containing a 80 by 80 matrix, from the left column to the right column.'''
         self.more_state = 0
 
     def calculate(self, mode):

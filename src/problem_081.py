@@ -25,7 +25,7 @@ class Problem_081(Problem):
         self.default_input = 'minimal'
         self.description_str = 'In the 5 by 5 matrix below, the ' + dye_input_var('minimal') + ''' path sum from the top left to the bottom right, by only moving to the right and down [...] is equal to 2427.\n'''
         self.description_str += "\n     " + self.test_matrix.fancy_ustr() + "\n"*self.test_matrix.dim()[0]
-        self.description_str += '''\nFind the minimal path sum, in matrix.txt (right click and "Save Link/Target As..."), a 31K text file containing a 80 by 80 matrix, from the top left to the bottom right by only moving right and down.'''
+        self.description_str += '''\nFind the minimal path sum, in matrix.txt, a 31K text file containing a 80 by 80 matrix, from the top left to the bottom right by only moving right and down.'''
         self.more_show_matrix = False
 
     def calculate(self, mode):
