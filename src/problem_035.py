@@ -12,7 +12,6 @@ from problem_000 import *
 from math import log10
 from prime import is_prime
 from number import get_digit_list, number_from_digit_list
-from sys import maxint
 from ppe_permutation import Cyclic_Rotation_Group
 
 
