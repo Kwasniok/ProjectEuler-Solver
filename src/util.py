@@ -19,11 +19,11 @@ from colours import *
 # @parm higlight_end index last element to be highlighted [optional, needs highlight_colour]
 def list_to_fancy_str(L, separator = None, normal_colour = None, highlight_colour = None, highlight_start = None, highlight_end = None):
     # clip bounds for special dye colour
-    if highlight_start < 0:
+    if highlight_start != None and highlight_start < 0:
         highlight_start = 0
-    if highlight_end > len(L) - 1:
+    if highlight_end != None and highlight_end > len(L) - 1:
         highlight_end = len(L) - 1
-    if highlight_end < highlight_start:
+    if highlight_start != None and highlight_end != None and highlight_end < highlight_start:
         highlight_colour = None
     #stores the final string
     s = ""
