@@ -1,6 +1,6 @@
 #   coding=UTF_8
 #
-#   problem_021.py
+#   problem_082.py
 #   ProjectEuler
 #
 #   This file was created by Jens Kwasniok on 22.06.17.
