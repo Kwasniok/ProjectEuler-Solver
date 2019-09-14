@@ -43,7 +43,11 @@ class Problem_083(Problem):
         n = A.dim()[0]
         m = A.dim()[1]
         
-        Problem_083.current_best = None
+        # store some upper bound for optimization (some sort path)
+        Problem_083.current_best  = sum(A[i,0] for i in range(n))
+        Problem_083.current_best += sum(A[n-1,j] for j in range(m) if j > 0)
+        
+        Problem_083.c = 0
 
         def get_best_path(i=0, j=0, _p=[], _pv=0):
             
@@ -51,17 +55,21 @@ class Problem_083(Problem):
             p = list(_p)
             p.append((i,j))
             
+            Problem_083.c += 1
+            
+            if Problem_083.c % 1000 == 0:
+                print(A.fancy_ustr(highlight=p))
+            
             if i == n - 1 and j == m - 1:
                 if Problem_083.current_best is None or pv < Problem_083.current_best:
                     Problem_083.current_best = pv
                     print(pv)
                     print(A.fancy_ustr(highlight=p))
+                    print('\n\n\n\n\n\n\n\n')
                 return [p, pv]
         
             if (not (Problem_083.current_best is None)) and pv > Problem_083.current_best:
                 return [None, None]
-
-
 
             branches = []
 
@@ -91,15 +99,16 @@ class Problem_083(Problem):
                 go_right = False
 
             # avoid neighbouring previous visited tiles
-            if (i-1,j-1) in p or (i-1,j+1) in p or (i-2,j) in p:
+            if go_up and ((i-1,j-1) in p or (i-1,j+1) in p or (i-2,j) in p):
                 go_up = False
-            if (i+1,j-1) in p or (i+1,j+1) in p or (i+2,j) in p:
-                down_up = False
-            if (i-1,j-1) in p or (i+1,j-1) in p or (i,j-2) in p:
-                left_up = False
-            if (i-1,j+1) in p or (i+1,j+1) in p or (i,j+2) in p:
-                right_up = False
-
+            if go_down and ((i+1,j-1) in p or (i+1,j+1) in p or (i+2,j) in p):
+                go_down = False
+            if go_left and ((i-1,j-1) in p or (i+1,j-1) in p or (i,j-2) in p):
+                go_left = False
+            if go_right and ((i-1,j+1) in p or (i+1,j+1) in p or (i,j+2) in p):
+                go_right = False
+            
+            
             # iterate on remaining possible branching paths
             if go_right:
                 branches.append(get_best_path(i, j+1, p, pv))
@@ -109,6 +118,20 @@ class Problem_083(Problem):
                 branches.append(get_best_path(i-1, j, p, pv))
             if go_left:
                 branches.append(get_best_path(i, j-1, p, pv))
+
+#            next = []
+#            if go_right:
+#                next.append((i, j+1))
+#            if go_left:
+#                next.append((i, j-1))
+#            if go_up:
+#                next.append((i-1, j))
+#            if go_down:
+#                next.append((i+1, j))
+#
+#            next = sorted(next, key=lambda x: A[x[0],x[1]])
+#            for nxt in next:
+#                branches.append(get_best_path(nxt[0], nxt[1], p, pv))
 
             best_branch = None
             best_branch_value = None
