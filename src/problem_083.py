@@ -42,23 +42,26 @@ class Problem_083(Problem):
         # dimensions of matrix in down and rigth direction
         n = A.dim()[0]
         m = A.dim()[1]
-        Problem_083.c = 0
+        
+        Problem_083.current_best = None
 
         def get_best_path(i=0, j=0, _p=[], _pv=0):
-
-            if i == n - 1 and j == m - 1:
-                Problem_083.c += 1
-                if Problem_083.c % 100 == 0:
-                    print(Problem_083.c)
-                    print(A.fancy_ustr(highlight=_p))
-
+            
+            pv = _pv + A[i,j]
             p = list(_p)
-            pv = _pv
             p.append((i,j))
-            pv += A[i,j]
-
+            
             if i == n - 1 and j == m - 1:
+                if Problem_083.current_best is None or pv < Problem_083.current_best:
+                    Problem_083.current_best = pv
+                    print(pv)
+                    print(A.fancy_ustr(highlight=p))
                 return [p, pv]
+        
+            if (not (Problem_083.current_best is None)) and pv > Problem_083.current_best:
+                return [None, None]
+
+
 
             branches = []
 
@@ -97,7 +100,7 @@ class Problem_083(Problem):
             if (i-1,j+1) in p or (i+1,j+1) in p or (i,j+2) in p:
                 right_up = False
 
-# iterate on remaining possible branching paths
+            # iterate on remaining possible branching paths
             if go_right:
                 branches.append(get_best_path(i, j+1, p, pv))
             if go_down:
