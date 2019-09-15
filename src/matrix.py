@@ -369,6 +369,16 @@ class Matrix():
 
     def __setitem__(self, I, val):
         self.vs[I[0]][I[1]] = val
+    
+    # identity
+    
+    def __eq__(self, other):
+        assert self.dim() == other.dim(), "missmatch in Matrix size when comparing"
+        for i in range(self.m):
+            for j in range(self.n):
+                if self[(i,j)] != other[(i,j)]:
+                    return False
+        return True
 
     # operators
 
@@ -453,3 +463,36 @@ class Matrix():
 
     def __imul__(self, other):
         self = self * other
+    
+    def elemmult(self, other):
+        assert self.dim() == other.dim(), "missmatch in Matrix size when multiplicating elementwise"
+        ret = Matrix(self.m, self.n)
+        for i in range(self.m):
+            for j in range(self.n):
+                ret[i,j] = self[i,j] * other[i,j]
+        return ret
+
+    def submatrix(self, i, j, m, n):
+        assert i >= 0, "missmatch in Matrix size (first dimension) when cutting"
+        assert j >= 0, "missmatch in Matrix size (second dimension) when cutting"
+        assert self.m >= i + m, "missmatch in Matrix size (first dimension) when cutting"
+        assert self.n >= j + n, "missmatch in Matrix size (second dimension) when cutting"
+        ret = Matrix(m,n)
+        for I in range(m):
+            for J in range(n):
+                ret[I,J] = self[i+I,j+J]
+        return ret
+
+    def __iter__(self):
+        class Iterator():
+            def __init__(s, mat):
+                s.matrix = mat
+                s.counter = 0
+            def __next__(s):
+                if s.counter >= s.matrix.m * s.matrix.n:
+                    raise StopIteration()
+                else:
+                    ret = s.matrix[int(s.counter/s.matrix.n), s.counter % s.matrix.n]
+                    s.counter += 1
+                    return ret
+        return Iterator(self)
