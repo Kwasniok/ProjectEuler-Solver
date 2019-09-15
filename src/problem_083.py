@@ -11,6 +11,7 @@ import sys
 from problem_000 import *
 from problem_083_matrix import matrix
 from matrix import *
+from math import inf as infinity, isnan
 
 sys.setrecursionlimit(100000)
 
@@ -40,135 +41,33 @@ class Problem_083(Problem):
         if mode == 'large':
             A = Matrix(matrix)
         # dimensions of matrix in down and rigth direction
-        n = A.dim()[0]
-        m = A.dim()[1]
+        m = A.dim()[0]
+        n = A.dim()[1]
         
-        # store some upper bound for optimization (some sort path)
-        Problem_083.current_best  = sum(A[i,0] for i in range(n))
-        Problem_083.current_best += sum(A[n-1,j] for j in range(m) if j > 0)
+        mp = Matrix(m, n, default_value=infinity)
+        mp[0,0] = A[0,0]
         
-        Problem_083.c = 0
-
-        def get_best_path(i=0, j=0, _p=[], _pv=0):
-            
-            pv = _pv + A[i,j]
-            p = list(_p)
-            p.append((i,j))
-            
-            Problem_083.c += 1
-            
-            if Problem_083.c % 1000 == 0:
-                print(A.fancy_ustr(highlight=p))
-            
-            if i == n - 1 and j == m - 1:
-                if Problem_083.current_best is None or pv < Problem_083.current_best:
-                    Problem_083.current_best = pv
-                    print(pv)
-                    print(A.fancy_ustr(highlight=p))
-                    print('\n\n\n\n\n\n\n\n')
-                return [p, pv]
+        mp_swap = Matrix(m, n, default_value=None)
         
-            if (not (Problem_083.current_best is None)) and pv > Problem_083.current_best:
-                return [None, None]
-
-            branches = []
-
-            go_up = True
-            go_down = True
-            go_left = True
-            go_right = True
-
-            # respect bounderies
-            if i == 0:
-                go_up = False
-            if i == n - 1:
-                go_down = False
-            if j == 0:
-                go_left = False
-            if j == n - 1:
-                go_right = False
-
-            # avoid second visit of tile
-            if (i-1,j) in p:
-                go_up = False
-            if (i+1,j) in p:
-                go_down = False
-            if (i,j-1) in p:
-                go_left = False
-            if (i,j+1) in p:
-                go_right = False
-
-            # avoid neighbouring previous visited tiles
-            if go_up and ((i-1,j-1) in p or (i-1,j+1) in p or (i-2,j) in p):
-                go_up = False
-            if go_down and ((i+1,j-1) in p or (i+1,j+1) in p or (i+2,j) in p):
-                go_down = False
-            if go_left and ((i-1,j-1) in p or (i+1,j-1) in p or (i,j-2) in p):
-                go_left = False
-            if go_right and ((i-1,j+1) in p or (i+1,j+1) in p or (i,j+2) in p):
-                go_right = False
+        for x in range(m*n): # max iteration number
             
+            #print(mp.fancy_ustr())
             
-            # iterate on remaining possible branching paths
-            if go_right:
-                branches.append(get_best_path(i, j+1, p, pv))
-            if go_down:
-                branches.append(get_best_path(i+1, j, p, pv))
-            if go_up:
-                branches.append(get_best_path(i-1, j, p, pv))
-            if go_left:
-                branches.append(get_best_path(i, j-1, p, pv))
+            for i in range(m):
+                for j in range(n):
+                    vs = []
+                    if i > 0: vs.append(mp[i-1,j] + A[i,j])
+                    if j > 0: vs.append(mp[i,j-1] + A[i,j])
+                    if i < m-1: vs.append(mp[i+1,j] + A[i,j])
+                    if j < n-1: vs.append(mp[i,j+1] + A[i,j])
+                    vs.append(mp[i,j])
+                    mp_swap[i,j] = min(vs)
+        
+            if mp == mp_swap: # stable?
+                break
+            
+            mp, mp_swap = mp_swap, mp
 
-#            next = []
-#            if go_right:
-#                next.append((i, j+1))
-#            if go_left:
-#                next.append((i, j-1))
-#            if go_up:
-#                next.append((i-1, j))
-#            if go_down:
-#                next.append((i+1, j))
-#
-#            next = sorted(next, key=lambda x: A[x[0],x[1]])
-#            for nxt in next:
-#                branches.append(get_best_path(nxt[0], nxt[1], p, pv))
-
-            best_branch = None
-            best_branch_value = None
-            for pair in branches:
-                branch = pair[0]
-                branch_value = pair[1]
-
-                if branch == None:
-                    continue
-
-                if best_branch == None:
-                    best_branch = branch
-                    best_branch_value = branch_value
-                else:
-                    if branch_value < best_branch_value:
-                        best_branch = branch
-                        best_branch_value = branch_value
-
-            if best_branch == None:
-                return [None, None]
-
-            return [best_branch, best_branch_value]
-
-        best_path_pair = get_best_path()
-
-        # get optimal path value
-        res = best_path_pair[1]
-        # extract optimal path indices
-        H = best_path_pair[0]
-
-        self.last_result = res
-        self.last_result_details = [A, H]
-    def details(self):
-        A = self.last_result_details[0]
-        H = self.last_result_details[1]
-        ret = "path: " + str(H)
-        ret += "\n    " + A.fancy_ustr(highlight=H)
-        return ret
+        self.last_result = mp[n-1,m-1]
 
 register_problem(Problem_083())
