@@ -90,7 +90,7 @@ class Draw():
     @staticmethod
     def box(line, col, height, width, stroke_heavy=False):
         if stroke_heavy:
-            # all box characters: ┏━┓ ┃ ┗━┛ ┣ ┫ ┳ ┻ ╋
+            # all box characters: ┏━┓ ┃ ━┗━┛ ┣ ┫ ┳ ┻ ╋
             Console.set_cursor(line, col)
             Console.write(u"┏" + u"━"*(width-2) + u"┓")
             i = 1
@@ -103,7 +103,7 @@ class Draw():
             Console.set_cursor(line+i, col)
             Console.write(u"┗" + u"━"*(width-2) + u"┛")
         else:
-            # all box characters: ┌─┐ │ └─┘ ├ ┤ ┬ ┴ ┼
+            # all box characters: ┌─┐ │ ─└─┘ ├ ┤ ┬ ┴ ┼
             Console.set_cursor(line, col)
             Console.write(u"┌" + u"─"*(width-2) + u"┐")
             i = 1
