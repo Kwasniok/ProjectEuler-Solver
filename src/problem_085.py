@@ -62,7 +62,6 @@ Although there exists no rectangular grid that contains exactly two million rect
         # lower bound: f(m,n) >= f(m,1) = m*(m+1)/2
         m_max = int(-0.5+sqrt(0.25+2*target) +1) # +1 to be safe
         for m in range(1,m_max):
-            if (m+1) % 1000 == 0: print(m+1)
             for n in range(m):
                 # calculate f(m+1,n) = f(m,n) + (m+1)*g(n)
                 x = v[n] + (m+1)*g(n+1)
